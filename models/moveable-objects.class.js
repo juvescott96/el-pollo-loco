@@ -5,6 +5,7 @@ class MoveableObjects {
     height = 175;
     width = 100;
     imageCache = {};
+    speed = 0.15;
 
 
 
@@ -23,6 +24,12 @@ class MoveableObjects {
 
     moveRight() {
         console.log('Moving Right');
+    }
+
+    moveLeft() {
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000 / 60);
     }
 
 
