@@ -58,6 +58,8 @@ class World {
         }
     };
 
+
+
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
