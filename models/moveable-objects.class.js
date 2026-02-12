@@ -9,6 +9,7 @@ class MoveableObjects {
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
+    energy = 100;
 
     applyGravity() {
         setInterval(() => {
@@ -38,6 +39,16 @@ class MoveableObjects {
             this.imageCache[path] = img;
         });
     }
+
+
+    // character.isColliding(chicken)
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.x < mo.x + mo.width &&
+            this.y + this.height > mo.y &&
+            this.y < mo.y + mo.height;
+    }
+
 
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
