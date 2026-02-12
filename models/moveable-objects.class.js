@@ -51,16 +51,7 @@ class MoveableObjects extends DrawableObject {
     }
 
 
-    drawFrame(ctx) {
 
-        if (this instanceof Character || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
 
     moveRight() {
         this.x += this.speed;
