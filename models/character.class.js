@@ -63,7 +63,6 @@ class Character extends MoveableObjects {
                 this.moveLeft();
                 this.otherDirection = true;
             }
-
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
             }
