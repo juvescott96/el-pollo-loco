@@ -42,6 +42,7 @@ class MoveableObjects extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+        this.idleTimer = 0;
     }
 
     isDead() {
@@ -54,19 +55,22 @@ class MoveableObjects extends DrawableObject {
         return timepassed < 1;
     }
 
-
-
-
     moveRight() {
         this.x += this.speed;
+        this.idleTimer = 0;
+
     }
 
     moveLeft() {
         this.x -= this.speed;
+        this.idleTimer = 0;
+
     }
 
     jump() {
         this.speedY = 30;
+        this.idleTimer = 0;
+
     }
 
     playAnimation(images) {
