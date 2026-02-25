@@ -6,13 +6,19 @@ class World {
     ctx;
     keyboard;
     camera_x = -100;
-    statusBar = new StatusBar();
+    statusBar;
+    statusBarCoin;
+    statusBarBottle;
     throwAbleObjects = [];
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.keyboard = keyboard;
+        // instantiate status bars after all class scripts loaded
+        this.statusBar = new StatusBar();
+        this.statusBarCoin = new StatusBarCoin();
+        this.statusBarBottle = new StatusBarBottle();
         this.draw();
         this.setWorld();
         this.run();
@@ -54,6 +60,8 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
 
         this.ctx.translate(this.camera_x, 0);
 
