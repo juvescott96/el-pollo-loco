@@ -1,0 +1,4 @@
+class CollidableObject extends MoveableObjects {
+
+
+}

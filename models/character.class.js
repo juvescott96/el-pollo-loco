@@ -66,6 +66,12 @@ class Character extends MoveableObjects {
     idleTimer = 0;
 
 
+    offset = {
+        top: 100,
+        left: 15,
+        right: 30,
+        bottom: 10
+    };
 
 
     constructor() {
