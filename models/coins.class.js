@@ -3,6 +3,13 @@ class Coins extends MoveableObjects {
     height = 150;
     width = 150;
 
+    offset = {
+        top: 50,
+        left: 50,
+        right: 50,
+        bottom: 50
+    };
+
     IMAGES_WALKING = [
         'img/8_coin/coin_1.png',
         'img/8_coin/coin_2.png',
