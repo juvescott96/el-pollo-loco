@@ -1,4 +1,4 @@
-class MoveableObject extends CollidableObject {
+class MoveableObject extends AnimatedObject {
 
     imageCache = {};
     speed = 0.15;
@@ -64,13 +64,6 @@ class MoveableObject extends CollidableObject {
         this.speedY = 30;
         this.idleTimer = 0;
 
-    }
-
-    playAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
     }
 
 }

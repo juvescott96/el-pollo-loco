@@ -1,4 +1,4 @@
-class Coins extends MoveableObject {
+class Coins extends AnimatedObject {
 
     height = 150;
     width = 150;
@@ -16,7 +16,7 @@ class Coins extends MoveableObject {
     ];
     currentImage = 0;
 
-    constructor(x) {
+    constructor() {
         super().loadImage('img/8_coin/coin_1.png');
         this.x = 400 + Math.random() * 2200;
         this.y = 10 + Math.random() * 220;
