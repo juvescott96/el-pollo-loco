@@ -32,6 +32,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkCollisionsCoins();
         }, 200);
     }
 
@@ -46,6 +47,18 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    checkCollisionsCoins() {
+        this.level.coins = this.level.coins.filter((coin) => {
+            if (this.character.isColliding(coin)) {
+                this.character.collectCoin();
+                this.statusBarCoin.setPercentage(this.character.coins);
+                return false; // remove coin from array
+            } else {
+                return true; // keep coin in array
             }
         });
     }

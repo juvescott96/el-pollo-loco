@@ -10,24 +10,25 @@ class Coins extends AnimatedObject {
         bottom: 50
     };
 
-    IMAGES_WALKING = [
+    IMAGES_ANIMATED = [
         'img/8_coin/coin_1.png',
         'img/8_coin/coin_2.png',
     ];
     currentImage = 0;
 
     constructor() {
-        super().loadImage('img/8_coin/coin_1.png');
-        this.x = 400 + Math.random() * 2200;
-        this.y = 10 + Math.random() * 220;
-        this.loadImages(this.IMAGES_WALKING);
+        super();
+        this.loadImage('img/8_coin/coin_1.png');
+        this.x = 400 + Math.random() * 1800;
+        this.y = 50 + Math.random() * 220;
+        this.loadImages(this.IMAGES_ANIMATED);
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 150);
+            this.playAnimation(this.IMAGES_ANIMATED);
+        }, 200);
     }
 
 };
