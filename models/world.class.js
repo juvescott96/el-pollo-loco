@@ -15,7 +15,6 @@ class World {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.keyboard = keyboard;
-        // instantiate status bars after all class scripts loaded
         this.statusBar = new StatusBar();
         this.statusBarCoin = new StatusBarCoin();
         this.statusBarBottle = new StatusBarBottle();

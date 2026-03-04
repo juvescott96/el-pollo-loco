@@ -1,4 +1,4 @@
-class Character extends MoveableObjects {
+class Character extends MoveableObject {
 
 
     height = 250;
@@ -69,7 +69,7 @@ class Character extends MoveableObjects {
     offset = {
         top: 100,
         left: 15,
-        right: 30,
+        right: 20,
         bottom: 10
     };
 

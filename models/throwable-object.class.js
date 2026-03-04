@@ -1,4 +1,4 @@
-class ThrowableObject extends MoveableObjects {
+class ThrowableObject extends MoveableObject {
 
 
     constructor(x, y) {

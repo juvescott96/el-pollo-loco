@@ -1,4 +1,4 @@
-class BackgroundObjects extends MoveableObjects {
+class BackgroundObjects extends MoveableObject {
 
     width = 720;
     height = 480;
