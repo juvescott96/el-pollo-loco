@@ -65,6 +65,7 @@ class Character extends MoveableObject {
     currentImage = 0;
     idleTimer = 0;
     coins = 0;
+    bottles = 0;
 
 
     offset = {
@@ -91,6 +92,10 @@ class Character extends MoveableObject {
 
     collectCoin() {
         this.coins += 20;
+    }
+
+    collectBottle() {
+        this.bottles += 20;
     }
 
     animate() {
