@@ -22,6 +22,13 @@ const level1 = new Level(
         new Coins(),
     ],
     [
+        new Bottles(),
+        new Bottles(),
+        new Bottles(),
+        new Bottles(),
+        new Bottles(),
+    ],
+    [
 
         new BackgroundObjects('img/5_background/layers/air.png', -719),
         new BackgroundObjects('img/5_background/layers/3_third_layer/2.png', -719),
