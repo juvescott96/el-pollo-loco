@@ -30,11 +30,11 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkCollisionsEnemies();
             this.checkThrowObjects();
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
-        }, 200);
+        }, 1000 / 20);
     }
 
     checkThrowObjects() {
@@ -43,9 +43,16 @@ class World {
             this.throwAbleObjects.push(bottle);
         }
     }
-    checkCollisions() {
+
+    checkCollisionsEnemies() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (enemy.dead) return; // überspringe tote Gegner
+            if (!this.character.isColliding(enemy)) return;
+
+            if (this.character.isJumpingOn(enemy)) {
+                enemy.dieEnemy();
+                this.character.speedY = 15;
+            } else {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }

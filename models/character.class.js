@@ -98,6 +98,23 @@ class Character extends MoveableObject {
         this.bottles += 20;
     }
 
+    isJumpingOn(enemy) {
+        const c = this.offset, e = enemy.offset;
+        const charLeft = this.x + c.left;
+        const charRight = this.x + this.width - c.right;
+        const enemyLeft = enemy.x + e.left;
+        const enemyRight = enemy.x + enemy.width - e.right;
+        const overlapX = charRight > enemyLeft && charLeft < enemyRight;
+        const charBottom = this.y + this.height - c.bottom;
+        const enemyTop = enemy.y + e.top;
+        const tolerance = 50;
+        const nearTop = charBottom <= enemyTop + tolerance;
+        const falling = this.speedY < 0;
+
+        return overlapX && falling && nearTop;
+    }
+
+
     animate() {
 
         setInterval(() => {
