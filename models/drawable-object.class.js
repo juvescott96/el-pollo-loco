@@ -23,7 +23,7 @@ class DrawableObject {
 
     drawFrame(ctx) {
 
-        if (this instanceof Character || this instanceof Chicken || this instanceof Coins || this instanceof Bottles || this instanceof ThrowableObject) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Coins || this instanceof Bottles || this instanceof ThrowableObject || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '2';
             // ctx.strokeStyle = 'blue';
@@ -33,6 +33,7 @@ class DrawableObject {
             ctx.stroke();
         }
     }
+
 
     /**
      * load miltiple images and saves them in the imageCache

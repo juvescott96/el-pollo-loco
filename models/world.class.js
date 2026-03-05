@@ -57,7 +57,7 @@ class World {
 
     checkCollisionsEnemies() {
         this.level.enemies.forEach((enemy) => {
-            if (enemy.dead) return; // überspringe tote Gegner
+            if (enemy.dead) return;
             if (!this.character.isColliding(enemy)) return;
 
             if (this.character.isJumpingOn(enemy)) {
@@ -106,34 +106,25 @@ class World {
         });
     }
 
-
     draw() {
-
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        this.ctx.save();
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottle);
-
-        this.ctx.translate(this.camera_x, 0);
-
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwAbleObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwAbleObjects);
+        this.addToMap(this.character);
+        this.ctx.restore();
 
-        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
 
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
+        requestAnimationFrame(() => this.draw());
     }
 
     addObjectsToMap(objects) {
