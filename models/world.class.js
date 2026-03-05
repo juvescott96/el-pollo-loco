@@ -34,6 +34,7 @@ class World {
             this.checkThrowObjects();
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
+            this.checkCollisionsEnemiesWithBottle()
         }, 1000 / 20);
     }
 
@@ -66,6 +67,18 @@ class World {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }
+        });
+    }
+
+    checkCollisionsEnemiesWithBottle() {
+        this.throwAbleObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (enemy.dead) return;
+                if (!bottle.isColliding(enemy)) return;
+
+                enemy.dieEnemy();
+                bottle.splash();
+            });
         });
     }
 

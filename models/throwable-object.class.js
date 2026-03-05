@@ -2,6 +2,12 @@ class ThrowableObject extends MoveableObject {
 
 
 
+    offset = {
+        top: 10,
+        left: 10,
+        right: 10,
+        bottom: 10
+    };
     IMAGES_BOTTLE = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -9,26 +15,58 @@ class ThrowableObject extends MoveableObject {
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ];
 
+    IMAGES_SPLASH = [
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+    ]
+
 
 
     constructor(x, y) {
         super();
         this.loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_BOTTLE);
+        this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
-        this.width = 50;
-        this.height = 50;
+        this.width = 70;
+        this.height = 70;
         this.throw();
+        this.splashed = false;
     }
 
     throw() {
-        this.speedY = 30;
+        this.speedY = 20;
         this.applyGravity();
-        setInterval(() => {
+
+        this.throwInterval = setInterval(() => {
+
+            if (this.splashed) return;
             this.x += 10;
             this.playAnimation(this.IMAGES_BOTTLE);
         }, 25);
     }
 
+    splash() {
+        if (this.splashed) return;
+        this.splashed = true;
+
+        if (this.throwInterval) {
+            clearInterval(this.throwInterval);
+        }
+
+        this.speedY = 0;
+
+        let i = 0;
+        this.splashInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_SPLASH);
+            i++;
+            if (i >= this.IMAGES_SPLASH.length) {
+                clearInterval(this.splashInterval);
+            }
+        }, 100);
+    }
 }
