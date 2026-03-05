@@ -38,7 +38,8 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.character.bottles > 0) {
+        if (this.keyboard.D && this.character.bottles > 0 && !this.throwLocked) {
+            this.throwLocked = true;
 
             let bottle = new ThrowableObject(
                 this.character.x + 100,
@@ -49,6 +50,8 @@ class World {
             this.character.bottles -= 1;
             this.statusBarBottle.setPercentage(this.character.bottles);
         }
+
+        if (!this.keyboard.D) this.throwLocked = false;
     }
 
     checkCollisionsEnemies() {
