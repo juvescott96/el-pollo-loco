@@ -95,7 +95,7 @@ class Character extends MoveableObject {
     }
 
     collectBottle() {
-        this.bottles += 20;
+        this.bottles += 1;
     }
 
     isJumpingOn(enemy) {
