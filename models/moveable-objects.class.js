@@ -76,4 +76,14 @@ class MoveableObject extends AnimatedObject {
         }, 1000);
     }
 
+    hitEndBoss() {
+        if (this.dead) return;
+        this.energy -= 20;
+        if (this.energy <= 0) {
+            this.energy = 0;
+            this.dieEnemy();
+        }
+    }
+
+
 }

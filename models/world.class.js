@@ -81,9 +81,16 @@ class World {
         this.throwAbleObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if (enemy.dead) return;
+                if (bottle.splashed) return;
                 if (!bottle.isColliding(enemy)) return;
 
-                enemy.dieEnemy();
+                if (enemy instanceof Endboss) {
+                    enemy.hitEndBoss();
+                    this.statusBarEndboss.setPercentage(enemy.energy);
+                } else {
+                    enemy.dieEnemy();
+                }
+
                 bottle.splash();
             });
         });

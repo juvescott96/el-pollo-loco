@@ -3,6 +3,8 @@ class Endboss extends MoveableObject {
     height = 350;
     width = 250;
     y = 105;
+    energy = 100;
+    dead = false;
 
     offset = {
         top: 55,
@@ -61,6 +63,8 @@ class Endboss extends MoveableObject {
         this.x = 2500;
         this.animate();
     }
+
+
 
     animate() {
 
