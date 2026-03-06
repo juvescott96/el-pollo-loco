@@ -9,7 +9,9 @@ class World {
     statusBar;
     statusBarCoin;
     statusBarBottle;
+    statusBarEndboss;
     throwAbleObjects = [];
+    endBossFightStarted = false;
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -18,6 +20,7 @@ class World {
         this.statusBar = new StatusBar();
         this.statusBarCoin = new StatusBarCoin();
         this.statusBarBottle = new StatusBarBottle();
+        this.statusBarEndboss = new StatusBarEndboss();
         this.draw();
         this.setWorld();
         this.run();
@@ -35,6 +38,9 @@ class World {
             this.checkCollisionsCoins();
             this.checkCollisionsBottles();
             this.checkCollisionsEnemiesWithBottle()
+            if (this.character.x >= this.level.level_end_x - 400) {
+                this.endBossFightStarted = true;
+            }
         }, 1000 / 20);
     }
 
@@ -123,7 +129,9 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-
+        if (this.endBossFightStarted) {
+            this.addToMap(this.statusBarEndboss);
+        }
         requestAnimationFrame(() => this.draw());
     }
 
