@@ -74,6 +74,7 @@ class World {
                 this.statusBar.setPercentage(this.character.energy);
             }
         });
+        this.level.enemies = this.level.enemies.filter(enemy => !enemy.remove);
     }
 
     checkCollisionsEnemiesWithBottle() {
