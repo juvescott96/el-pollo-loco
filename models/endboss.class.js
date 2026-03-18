@@ -5,10 +5,12 @@ class Endboss extends MoveableObject {
     y = 105;
     energy = 100;
     dead = false;
+    speed = 3;
+    fightStartTime = 0;
 
     offset = {
         top: 55,
-        left: 10,
+        left: 20,
         right: 0,
         bottom: 10
     };
@@ -66,17 +68,36 @@ class Endboss extends MoveableObject {
 
 
 
+
     animate() {
 
         setInterval(() => {
+            if (!this.world) return;
+            if (!this.world.endBossFightStarted) return;
+
+            if (this.world.endBossFightStarted && this.fightStartTime === 0) {
+                this.fightStartTime = new Date().getTime();
+            }
+
+            let timePasssed = (new Date().getTime() - this.fightStartTime) / 1000;
+
+            if (timePasssed < 3) {
+                this.playAnimation(this.IMAGES_ALERT);
+                return;
+            }
+
+            let distance = Math.abs(this.x - this.world.character.x);
 
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+            } else if (distance < 60) {
+                this.playAnimation(this.IMAGES_ATTACK);
             } else {
-                this.playAnimation(this.IMAGES_ALERT);
+                this.moveLeft();
+                this.playAnimation(this.IMAGES_WALKING);
             }
-        }, 150);
+        }, 120);
     }
 }

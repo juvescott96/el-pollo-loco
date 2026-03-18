@@ -28,6 +28,10 @@ class World {
 
     setWorld() {
         this.character.world = this;
+
+        this.level.enemies.forEach((enemy) => {
+            enemy.world = this;
+        });
     }
 
 
@@ -41,7 +45,7 @@ class World {
             if (this.character.x >= this.level.level_end_x - 400) {
                 this.endBossFightStarted = true;
             }
-        }, 1000 / 20);
+        }, 1000 / 60);
     }
 
     checkThrowObjects() {
