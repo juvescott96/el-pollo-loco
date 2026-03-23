@@ -3,6 +3,10 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url('img/background-design/background-img.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 canvas {
