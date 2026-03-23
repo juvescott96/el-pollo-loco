@@ -98,6 +98,7 @@ class World {
                 bottle.splash();
             });
         });
+        this.throwAbleObjects = this.throwAbleObjects.filter(bottle => !bottle.isRemoved);
     }
 
     checkCollisionsCoins() {

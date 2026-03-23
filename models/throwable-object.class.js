@@ -54,11 +54,10 @@ class ThrowableObject extends MoveableObject {
         if (this.splashed) return;
         this.splashed = true;
 
-        if (this.throwInterval) {
-            clearInterval(this.throwInterval);
-        }
-
+        clearInterval(this.throwInterval);
+        this.stopGravity();
         this.speedY = 0;
+
 
         let i = 0;
         this.splashInterval = setInterval(() => {
@@ -66,6 +65,7 @@ class ThrowableObject extends MoveableObject {
             i++;
             if (i >= this.IMAGES_SPLASH.length) {
                 clearInterval(this.splashInterval);
+                this.isRemoved = true;
             }
         }, 100);
     }
