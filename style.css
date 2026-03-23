@@ -1,14 +1,27 @@
+@font-face {
+    font-family: 'zabars';
+    src: url('fonts/zabars.ttf') format('truetype');
+    font-display: swap;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-image: url('img/background-design/background-img.png');
-    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     min-height: 100vh;
+    margin: 0;
+    font-family: 'zabars', sans-serif;
 }
 
 canvas {
     background-color: black;
+}
+
+h1 {
+    font-size: 64px;
 }
