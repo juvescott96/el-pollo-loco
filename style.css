@@ -24,4 +24,6 @@ canvas {
 
 h1 {
     font-size: 64px;
+    letter-spacing: 4px;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
 }
