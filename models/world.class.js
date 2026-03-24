@@ -1,7 +1,7 @@
 class World {
 
     character = new Character();
-    level = level1;
+    level;
     canvas;
     ctx;
     keyboard;
@@ -21,6 +21,7 @@ class World {
         this.statusBarCoin = new StatusBarCoin();
         this.statusBarBottle = new StatusBarBottle();
         this.statusBarEndboss = new StatusBarEndboss();
+        this.level = new createLevel1();
         this.draw();
         this.setWorld();
         this.run();
@@ -32,6 +33,22 @@ class World {
         this.level.enemies.forEach((enemy) => {
             enemy.world = this;
         });
+    }
+
+    areStartAssetsLoaded() {
+        let objectsToCheck = [
+            this.character,
+            this.statusBar,
+            this.statusBarCoin,
+            this.statusBarBottle
+        ];
+
+        let firstBackground = this.level.backgroundObjects[0];
+        if (firstBackground) {
+            objectsToCheck.push(firstBackground);
+        }
+
+        return objectsToCheck.every(obj => obj.imagesLoaded > 0 || (obj.img && obj.img.complete));
     }
 
 

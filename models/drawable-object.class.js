@@ -6,11 +6,8 @@ class DrawableObject {
     y = 250;
     height = 175;
     width = 100;
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
+    imagesToLoad = 0;
+    imagesLoaded = 0;
 
 
     /**
@@ -18,32 +15,29 @@ class DrawableObject {
      * @param {CanvasRenderingContext2D} ctx - the convas context used to draw 
      */
     draw(ctx) {
+        if (!this.img || !this.img.complete) return;
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    // drawFrame(ctx) {
+    loadImage(path) {
+        this.imagesToLoad++;
+        this.img = new Image();
+        this.img.onload = () => {
+            this.imagesLoaded++;
+        };
+        this.img.src = path;
+    }
 
-    //     if (this instanceof Character || this instanceof Chicken || this instanceof Coins || this instanceof Bottles || this instanceof ThrowableObject || this instanceof Endboss) {
-    //         ctx.beginPath();
-    //         ctx.lineWidth = '0';
-    //         // ctx.strokeStyle = 'blue';
-    //         // ctx.rect(this.x, this.y, this.width, this.height);
-    //         ctx.strokeStyle = 'none';
-    //         ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.left - this.offset.right, this.height - this.offset.top - this.offset.bottom);
-    //         ctx.stroke();
-    //     }
-    // }
-
-
-    /**
-     * load miltiple images and saves them in the imageCache
-     * @param {string[]} arr - an array of image paths to load 
-     */
     loadImages(arr) {
         arr.forEach((path) => {
+            this.imagesToLoad++;
             let img = new Image();
+            img.onload = () => {
+                this.imagesLoaded++;
+            };
             img.src = path;
             this.imageCache[path] = img;
         });
     }
+
 }

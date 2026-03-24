@@ -8,8 +8,22 @@ function init() {
 }
 
 function startGame() {
-    document.getElementById('startScreen').style.display = 'none';
     world = new World(canvas, keyboard);
+    waitForGameToBeReady();
+}
+
+function waitForGameToBeReady() {
+    let checkReady = setInterval(() => {
+        if (world.areStartAssetsLoaded()) {
+            clearInterval(checkReady);
+            hideStartScreen();
+        }
+    }, 25);
+}
+
+function hideStartScreen() {
+    let startScreen = document.getElementById('startScreen');
+    startScreen.style.display = 'none';
 }
 
 window.addEventListener('keydown', (e) => {
