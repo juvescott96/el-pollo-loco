@@ -5,11 +5,11 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.querySelector("canvas");
-    world = new World(canvas, keyboard);
 }
 
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
+    world = new World(canvas, keyboard);
 }
 
 window.addEventListener('keydown', (e) => {
