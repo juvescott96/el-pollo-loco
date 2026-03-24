@@ -8,6 +8,10 @@ function init() {
     world = new World(canvas, keyboard);
 }
 
+function startGame() {
+    document.getElementById('startScreen').style.display = 'none';
+}
+
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
