@@ -7,4 +7,13 @@ class AnimatedObject extends CollidableObject {
         this.currentImage++;
     }
 
+    playAnimationOnce(images, index) {
+        if (index < images.length) {
+            let path = images[index];
+            if (this.imageCache[path]) {
+                this.img = this.imageCache[path];
+            }
+        }
+    }
+
 }
