@@ -30,7 +30,6 @@ class Character extends MoveableObject {
         'img/2_character_pepe/5_dead/D-54.png',
         'img/2_character_pepe/5_dead/D-55.png',
         'img/2_character_pepe/5_dead/D-56.png',
-        'img/2_character_pepe/5_dead/D-57.png',
     ];
     IMAGES_HURT = [
         'img/2_character_pepe/4_hurt/H-41.png',
@@ -66,6 +65,11 @@ class Character extends MoveableObject {
     idleTimer = 0;
     coins = 0;
     bottles = 0;
+
+    deadAnimationStarted = false;
+    deadImageIndex = 0;
+    deadJumpDone = false;
+    gameOver = false
 
 
     offset = {
@@ -116,10 +120,30 @@ class Character extends MoveableObject {
         return overlapX && falling && nearTop;
     }
 
+    playDeadAnimation() {
+        if (this.animationTimer >= 200) {
+            if (this.deadImageIndex < this.IMAGES_DEAD.length) {
+                if (this.deadImageIndex === 2 && !this.deadJumpDone) {
+                    this.deadJump();
+                    this.deadJumpDone = true;
+                }
+                this.playAnimationOnce(this.IMAGES_DEAD, this.deadImageIndex);
+                this.deadImageIndex++;
+            } else {
+                this.playAnimationOnce(this.IMAGES_DEAD, this.IMAGES_DEAD.length - 1);
+            }
+            this.animationTimer = 0;
+        }
+        // if (this.y > 600) {
+        //     this.gameOver = true;
+        //     console.log(this.gameOver);
+        // }
+    }
 
     animate() {
 
         setInterval(() => {
+            if (this.isDead()) return;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -139,8 +163,14 @@ class Character extends MoveableObject {
             this.animationTimer += 50;
 
             if (this.isDead()) {
-                this.animationSpeed = 50;
-                this.playAnimation(this.IMAGES_DEAD);
+                if (!this.deadAnimationStarted) {
+                    this.deadAnimationStarted = true;
+                    this.deadImageIndex = 0;
+                    this.animationTimer = 0;
+                    this.deadJumpDone = false;
+                }
+                this.playDeadAnimation();
+                return;
             } else if (this.isHurt()) {
                 this.animationSpeed = 50;
                 this.playAnimation(this.IMAGES_HURT);

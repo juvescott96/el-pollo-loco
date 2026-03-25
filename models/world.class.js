@@ -84,7 +84,7 @@ class World {
 
     checkCollisionsEnemies() {
         this.level.enemies.forEach((enemy) => {
-            if (enemy.dead) return;
+            if (enemy.dead || this.character.isDead()) return;
             if (!this.character.isColliding(enemy)) return;
 
             if (this.character.isJumpingOn(enemy)) {

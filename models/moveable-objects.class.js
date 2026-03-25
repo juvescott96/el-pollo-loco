@@ -27,11 +27,18 @@ class MoveableObject extends AnimatedObject {
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
-        } else {
-            return this.y < 180;
         }
+        if (this.isFallingAfterDeath()) {
+            return true;
+        }
+        return this.y < 180;
     }
 
+    isFallingAfterDeath() {
+        if (this instanceof Character && this.isDead() && this.deadJumpDone) {
+            return true;
+        }
+    }
 
     hit() {
         this.energy -= 1;
@@ -70,6 +77,10 @@ class MoveableObject extends AnimatedObject {
         this.speedY = 30;
         this.idleTimer = 0;
 
+    }
+
+    deadJump() {
+        this.speedY = 20;
     }
 
     dieEnemy() {
