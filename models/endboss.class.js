@@ -81,7 +81,7 @@ class Endboss extends MoveableObject {
 
             let timePasssed = (new Date().getTime() - this.fightStartTime) / 1000;
 
-            if (timePasssed < 3) {
+            if (timePasssed < 1) {
                 this.playAnimation(this.IMAGES_ALERT);
                 return;
             }
