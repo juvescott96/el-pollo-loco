@@ -12,6 +12,9 @@ class World {
     statusBarEndboss;
     throwAbleObjects = [];
     endBossFightStarted = false;
+    gameOver = false;
+    animationFrameId;
+    intervals = [];
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -53,7 +56,7 @@ class World {
 
 
     run() {
-        setInterval(() => {
+        let interval = setInterval(() => {
             this.checkCollisionsEnemies();
             this.checkThrowObjects();
             this.checkCollisionsCoins();
@@ -63,6 +66,8 @@ class World {
                 this.endBossFightStarted = true;
             }
         }, 1000 / 60);
+
+        this.intervals.push(interval);
     }
 
     checkThrowObjects() {
@@ -143,6 +148,7 @@ class World {
     }
 
     draw() {
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.save();
@@ -162,7 +168,7 @@ class World {
         if (this.endBossFightStarted) {
             this.addToMap(this.statusBarEndboss);
         }
-        requestAnimationFrame(() => this.draw());
+        this.animationFrameId = requestAnimationFrame(() => this.draw());
     }
 
     addObjectsToMap(objects) {
@@ -196,5 +202,18 @@ class World {
     flipImageBack(mo) {
         this.ctx.restore();
         mo.x = mo.x * -1;
+    }
+
+    endGame() {
+        this.gameOver = true;
+
+        this.intervals.forEach(interval => clearInterval(interval));
+        cancelAnimationFrame(this.animationFrameId);
+
+        this.character.stopAnimation();
+        this.level.enemies.forEach(enemy => enemy.stopAnimations());
+        this.level.coins.forEach(coin => coin.stopAnimations());
+        this.level.Endboss.forEach(endboss => endboss.stopAnimations());
+        this.throwAbleObjects.forEach(bottle => bottle.stopAnimations());
     }
 }

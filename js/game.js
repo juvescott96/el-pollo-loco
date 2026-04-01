@@ -22,8 +22,7 @@ function waitForGameToBeReady() {
 }
 
 function hideStartScreen() {
-    let startScreen = document.getElementById('startScreen');
-    startScreen.style.display = 'none';
+    document.getElementById('startScreen').style.display = 'none';
 }
 
 window.addEventListener('keydown', (e) => {

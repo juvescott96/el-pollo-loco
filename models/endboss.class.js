@@ -71,7 +71,7 @@ class Endboss extends MoveableObject {
 
     animate() {
 
-        setInterval(() => {
+        this.animationInterval = setInterval(() => {
             if (!this.world) return;
             if (!this.world.endBossFightStarted) return;
 
@@ -99,5 +99,9 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 120);
+    }
+
+    stopAnimations() {
+        clearInterval(this.animationInterval);
     }
 }

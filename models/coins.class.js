@@ -26,9 +26,13 @@ class Coins extends AnimatedObject {
     }
 
     animate() {
-        setInterval(() => {
+        this.animationInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_ANIMATED);
         }, 200);
+    }
+
+    stopAnimations() {
+        clearInterval(this.animationInterval);
     }
 
 };

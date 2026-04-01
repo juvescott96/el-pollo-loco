@@ -134,16 +134,14 @@ class Character extends MoveableObject {
             }
             this.animationTimer = 0;
         }
-        // if (this.y > 600) {
-        //     this.gameOver = true;
-        //     console.log(this.gameOver);
-        // }
+        if (this.y > 600) {
+            this.world.endGame();
+        }
     }
 
     animate() {
 
-        setInterval(() => {
-            if (this.isDead()) return;
+        this.moveInterval = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -158,7 +156,7 @@ class Character extends MoveableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setInterval(() => {
+        this.animationInterval = setInterval(() => {
 
             this.animationTimer += 50;
 
@@ -198,6 +196,11 @@ class Character extends MoveableObject {
             }
         }, 50);
 
+    }
+
+    stopAnimations() {
+        clearInterval(this.moveInterval);
+        clearInterval(this.animationInterval);
     }
 
 }

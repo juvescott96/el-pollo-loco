@@ -69,4 +69,9 @@ class ThrowableObject extends MoveableObject {
             }
         }, 100);
     }
+
+    stopAnimations() {
+        clearInterval(this.throwInterval);
+        clearInterval(this.splashInterval);
+    }
 }
