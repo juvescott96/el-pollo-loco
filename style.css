@@ -43,6 +43,17 @@ h1 {
     cursor: pointer;
 }
 
-.d_none {
-    display: none;
+
+.gameover, .gamewin {
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.9s ease, transform 0.8s ease;
+}
+
+.gameover.d_none,
+.gamewin.d_none {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
 }

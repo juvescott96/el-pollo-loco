@@ -207,12 +207,14 @@ class World {
     gameOver() {
         this.isGameOver = true;
         this.stopGame();
+
     }
 
     gameWin() {
         this.isGameOver = true;
         setTimeout(() => {
-            this.stopGame();;
+            this.stopGame();
+            document.getElementById('gameWinScreen').classList.remove('d_none');
         }, 2000);
 
     }
@@ -221,10 +223,9 @@ class World {
         this.intervals.forEach(interval => clearInterval(interval));
         cancelAnimationFrame(this.animationFrameId);
 
-        this.character.stopAnimation();
+        this.character.stopAnimations();
         this.level.enemies.forEach(enemy => enemy.stopAnimations());
         this.level.coins.forEach(coin => coin.stopAnimations());
-        this.level.Endboss.forEach(endboss => endboss.stopAnimations());
         this.throwAbleObjects.forEach(bottle => bottle.stopAnimations());
     }
 }
