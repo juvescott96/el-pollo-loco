@@ -209,6 +209,14 @@ class World {
         this.stopGame();
     }
 
+    gameWin() {
+        this.isGameOver = true;
+        setTimeout(() => {
+            this.stopGame();;
+        }, 1000);
+
+    }
+
     stopGame() {
         this.intervals.forEach(interval => clearInterval(interval));
         cancelAnimationFrame(this.animationFrameId);

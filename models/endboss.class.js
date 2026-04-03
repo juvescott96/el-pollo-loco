@@ -90,6 +90,7 @@ class Endboss extends MoveableObject {
 
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.world.gameWin();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (distance < 60) {
