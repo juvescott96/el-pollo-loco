@@ -213,7 +213,7 @@ class World {
         this.isGameOver = true;
         setTimeout(() => {
             this.stopGame();;
-        }, 1000);
+        }, 2000);
 
     }
 
