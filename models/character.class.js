@@ -135,7 +135,7 @@ class Character extends MoveableObject {
             this.animationTimer = 0;
         }
         if (this.y > 600) {
-            this.world.endGame();
+            this.world.gameOver();
         }
     }
 

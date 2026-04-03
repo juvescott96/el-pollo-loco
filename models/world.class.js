@@ -12,7 +12,7 @@ class World {
     statusBarEndboss;
     throwAbleObjects = [];
     endBossFightStarted = false;
-    gameOver = false;
+    isGameOver = false;
     animationFrameId;
     intervals = [];
 
@@ -204,9 +204,12 @@ class World {
         mo.x = mo.x * -1;
     }
 
-    endGame() {
-        this.gameOver = true;
+    gameOver() {
+        this.isGameOver = true;
+        this.stopGame();
+    }
 
+    stopGame() {
         this.intervals.forEach(interval => clearInterval(interval));
         cancelAnimationFrame(this.animationFrameId);
 
