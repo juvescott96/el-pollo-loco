@@ -207,7 +207,7 @@ class World {
     gameOver() {
         this.isGameOver = true;
         this.stopGame();
-
+        document.getElementById('gameOverScreen').classList.remove('d_none');
     }
 
     gameWin() {
