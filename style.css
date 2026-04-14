@@ -74,3 +74,37 @@ h1 {
 .overlay.d_none .overlay-img {
     transform: scale(0.8);
 }
+
+
+.btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f7b23b;
+    border: 2px solid #764300e1;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.ui-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.control-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-controls,
+.right-controls {
+    display: flex;
+    gap: 10px;
+}
