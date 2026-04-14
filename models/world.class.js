@@ -37,6 +37,17 @@ class World {
         this.level.enemies.forEach((enemy) => {
             enemy.world = this;
         });
+        this.level.coins.forEach((coin) => {
+            coin.world = this;
+        });
+
+        this.level.clouds.forEach((cloud) => {
+            cloud.world = this;
+        });
+
+        this.level.bottles.forEach((bottle) => {
+            bottle.world = this;
+        });
     }
 
     areStartAssetsLoaded() {
