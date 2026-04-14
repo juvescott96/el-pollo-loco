@@ -36,8 +36,14 @@
         <img id="startScreen" class="startscreen" onclick="startGame()"
             src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Screen">
         <canvas width="720" height="480"></canvas>
-        <img id="gameOverScreen" class="gameover d_none" src="img/You won, you lost/You lost b.png" alt="You lost">
-        <img id="gameWinScreen" class="gamewin d_none" src="img/You won, you lost/You Win A.png" alt="You won">
+
+        <div id="gameOverScreen" class="overlay d_none">
+            <img class="overlay-img" src="img/You won, you lost/You lost b.png" alt="You lost">
+        </div>
+
+        <div id="gameWinScreen" class="overlay d_none">
+            <img class="overlay-img" src="img/You won, you lost/You Win A.png" alt="You won">
+        </div>
     </div>
 
 </body>
