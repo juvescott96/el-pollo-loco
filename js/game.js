@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let gameStarted = false;
 
 
 function init() {
@@ -25,6 +26,25 @@ function hideStartScreen() {
     document.getElementById('startScreen').style.display = 'none';
 }
 
+function togglePlay() {
+    let playIcon = document.getElementById('playIcon');
+
+    if (!gameStarted) {
+        startGame();
+        playIcon.src = "/img/icon/pause.png";
+        gameStarted = true;
+        return;
+    }
+
+    if (world.isPaused) {
+        world.resumeGame();
+        playIcon.src = "/img/icon/pause.png";
+    } else {
+        world.pauseGame();
+        playIcon.src = "/img/icon/play.png";
+    }
+}
+
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -39,6 +59,7 @@ window.addEventListener('keydown', (e) => {
         keyboard.DOWN = true;
     }
     if (e.keyCode == 32) {
+        e.preventDefault();
         keyboard.SPACE = true;
     }
     if (e.keyCode == 68) {

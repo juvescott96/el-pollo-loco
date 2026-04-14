@@ -33,13 +33,13 @@
     <h1>El pollo loco</h1>
 
     <div class="game-container">
-        <img id="startScreen" class="startscreen" onclick="startGame()"
+        <img id="startScreen" class="startscreen" onclick="togglePlay()"
             src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Screen">
         <canvas width="720" height="480"></canvas>
 
         <div class="ui-buttons">
-            <button class="btn">
-                <img src="/img/icon/play.png" alt="play">
+            <button class="btn" onclick="togglePlay()">
+                <img id="playIcon" src="/img/icon/play.png" alt="play">
             </button>
             <button class="btn">
                 <img src="/img/icon/volume_on.png" alt="volume on">

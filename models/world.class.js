@@ -13,6 +13,7 @@ class World {
     throwAbleObjects = [];
     endBossFightStarted = false;
     isGameOver = false;
+    isPaused = false;
     animationFrameId;
     intervals = [];
 
@@ -57,6 +58,7 @@ class World {
 
     run() {
         let interval = setInterval(() => {
+            if (this.isGameOver || this.isPaused) return;
             this.checkCollisionsEnemies();
             this.checkThrowObjects();
             this.checkCollisionsCoins();
@@ -227,5 +229,13 @@ class World {
         this.level.enemies.forEach(enemy => enemy.stopAnimations());
         this.level.coins.forEach(coin => coin.stopAnimations());
         this.throwAbleObjects.forEach(bottle => bottle.stopAnimations());
+    }
+
+    pauseGame() {
+        this.isPaused = true;
+    }
+
+    resumeGame() {
+        this.isPaused = false;
     }
 }

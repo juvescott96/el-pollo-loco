@@ -72,6 +72,7 @@ class Endboss extends MoveableObject {
     animate() {
 
         this.animationInterval = setInterval(() => {
+            if (this.world && this.world.isPaused) return;
             if (!this.world) return;
             if (!this.world.endBossFightStarted) return;
 

@@ -142,6 +142,7 @@ class Character extends MoveableObject {
     animate() {
 
         this.moveInterval = setInterval(() => {
+            if (this.world && this.world.isPaused) return;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -157,6 +158,7 @@ class Character extends MoveableObject {
         }, 1000 / 60);
 
         this.animationInterval = setInterval(() => {
+            if (this.world && this.world.isPaused) return;
 
             this.animationTimer += 50;
 
