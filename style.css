@@ -84,6 +84,14 @@ h1 {
     border: 2px solid #764300e1;
     font-size: 24px;
     cursor: pointer;
+        display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn img {
+    width: 30px;
+    height: 30px;
 }
 
 .ui-buttons {
