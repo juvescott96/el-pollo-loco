@@ -76,7 +76,7 @@ class MoveableObject extends AnimatedObject {
     jump() {
         this.speedY = 30;
         this.idleTimer = 0;
-
+        audioManager.play('jump');
     }
 
     deadJump() {

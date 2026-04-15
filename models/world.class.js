@@ -5,6 +5,7 @@ class World {
     canvas;
     ctx;
     keyboard;
+    audioManager;
     camera_x = -100;
     statusBar;
     statusBarCoin;
@@ -14,14 +15,14 @@ class World {
     endBossFightStarted = false;
     isGameOver = false;
     isPaused = false;
-    isMuted = false;
     animationFrameId;
     intervals = [];
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, audioManager) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.keyboard = keyboard;
+        this.audioManager = audioManager;
         this.statusBar = new StatusBar();
         this.statusBarCoin = new StatusBarCoin();
         this.statusBarBottle = new StatusBarBottle();
@@ -245,17 +246,11 @@ class World {
 
     pauseGame() {
         this.isPaused = true;
+        this.audioManager.pause('background');
     }
 
     resumeGame() {
         this.isPaused = false;
-    }
-
-    mute() {
-        this.isMuted = true;
-    }
-
-    unmute() {
-        this.isMuted = false;
+        this.audioManager.playMusic('background');
     }
 }

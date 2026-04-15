@@ -1,17 +1,20 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let audioManager = new AudioManager();
 let gameStarted = false;
 let isMuted = false;
 
 
 function init() {
     canvas = document.querySelector("canvas");
+
 }
 
 function startGame() {
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, audioManager);
     world.isMuted = isMuted;
+    audioManager.play('background');
     waitForGameToBeReady();
 }
 
@@ -50,15 +53,16 @@ function togglePlay() {
 function toggleVolume() {
     let volumeIcon = document.getElementById('volumeIcon');
 
-
     isMuted = !isMuted;
 
     volumeIcon.src = isMuted
         ? "/img/icon/volume_off.png"
         : "/img/icon/volume_on.png";
 
-    if (world) {
-        world.isMuted = isMuted;
+    if (audioManager.isMuted) {
+        audioManager.unmute();
+    } else {
+        audioManager.mute();
     }
 }
 
