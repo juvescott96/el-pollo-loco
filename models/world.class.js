@@ -14,6 +14,7 @@ class World {
     endBossFightStarted = false;
     isGameOver = false;
     isPaused = false;
+    isMuted = false;
     animationFrameId;
     intervals = [];
 
@@ -248,5 +249,13 @@ class World {
 
     resumeGame() {
         this.isPaused = false;
+    }
+
+    mute() {
+        this.isMuted = true;
+    }
+
+    unmute() {
+        this.isMuted = false;
     }
 }

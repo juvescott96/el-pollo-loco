@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameStarted = false;
+let isMuted = false;
 
 
 function init() {
@@ -10,6 +11,7 @@ function init() {
 
 function startGame() {
     world = new World(canvas, keyboard);
+    world.isMuted = isMuted;
     waitForGameToBeReady();
 }
 
@@ -42,6 +44,21 @@ function togglePlay() {
     } else {
         world.pauseGame();
         playIcon.src = "/img/icon/play.png";
+    }
+}
+
+function toggleVolume() {
+    let volumeIcon = document.getElementById('volumeIcon');
+
+
+    isMuted = !isMuted;
+
+    volumeIcon.src = isMuted
+        ? "/img/icon/volume_off.png"
+        : "/img/icon/volume_on.png";
+
+    if (world) {
+        world.isMuted = isMuted;
     }
 }
 
