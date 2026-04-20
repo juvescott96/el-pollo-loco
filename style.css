@@ -94,6 +94,16 @@ h1 {
     height: 30px;
 }
 
+.btn,
+.btn img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.btn img {
+    pointer-events: none;
+}
+
 .ui-buttons {
     position: absolute;
     top: 10px;

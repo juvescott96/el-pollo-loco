@@ -8,6 +8,7 @@ let isMuted = false;
 
 function init() {
     canvas = document.querySelector("canvas");
+    initMobileButtons();
 
 }
 
@@ -108,3 +109,26 @@ window.addEventListener('keyup', (e) => {
         keyboard.D = false;
     }
 });
+
+function initMobileButtons() {
+    let btnLeft = document.getElementById('btnLeft');
+    let btnRight = document.getElementById('btnRight');
+    let jumpBtn = document.getElementById('jumpBtn');
+    let throwBtn = document.getElementById('throwBtn');
+
+    btnLeft.addEventListener('pointerdown', () => keyboard.LEFT = true);
+    btnLeft.addEventListener('pointerup', () => keyboard.LEFT = false);
+    btnLeft.addEventListener('pointerleave', () => keyboard.LEFT = false);
+
+    btnRight.addEventListener('pointerdown', () => keyboard.RIGHT = true);
+    btnRight.addEventListener('pointerup', () => keyboard.RIGHT = false);
+    btnRight.addEventListener('pointerleave', () => keyboard.RIGHT = false);
+
+    jumpBtn.addEventListener('pointerdown', () => keyboard.SPACE = true);
+    jumpBtn.addEventListener('pointerup', () => keyboard.SPACE = false);
+    jumpBtn.addEventListener('pointerleave', () => keyboard.SPACE = false);
+
+    throwBtn.addEventListener('pointerdown', () => keyboard.D = true);
+    throwBtn.addEventListener('pointerup', () => keyboard.D = false);
+    throwBtn.addEventListener('pointerleave', () => keyboard.D = false);
+}
