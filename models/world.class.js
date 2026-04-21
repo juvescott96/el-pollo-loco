@@ -103,20 +103,32 @@ class World {
     }
 
     checkCollisionsEnemies() {
+        let jumpedOnEnemy = false;
+        let touchedEnemyFromSide = false;
+
         this.level.enemies.forEach((enemy) => {
             if (enemy.dead || this.character.isDead()) return;
             if (!this.character.isColliding(enemy)) return;
 
             if (this.character.isJumpingOn(enemy)) {
                 enemy.dieEnemy();
-                this.character.speedY = 15;
+                jumpedOnEnemy = true;
             } else {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                touchedEnemyFromSide = true;
             }
         });
+
+        if (jumpedOnEnemy) {
+            this.character.speedY = 15;
+        } else if (touchedEnemyFromSide && !this.character.isHurt()) {
+            this.character.hit();
+            this.audioManager.play('hurt');
+            this.statusBar.setPercentage(this.character.energy);
+        }
+
         this.level.enemies = this.level.enemies.filter(enemy => !enemy.remove);
     }
+
 
     checkCollisionsEnemiesWithBottle() {
         this.throwAbleObjects.forEach((bottle) => {
@@ -141,6 +153,7 @@ class World {
     checkCollisionsCoins() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.isColliding(coin)) {
+                this.audioManager.play('coins');
                 this.character.collectCoin();
                 this.statusBarCoin.setPercentage(this.character.coins);
                 return false;
@@ -148,11 +161,13 @@ class World {
                 return true;
             }
         });
+
     }
 
     checkCollisionsBottles() {
         this.level.bottles = this.level.bottles.filter((bottle) => {
             if (this.character.isColliding(bottle) && this.character.bottles < 5) {
+                this.audioManager.play('throw-collect');
                 this.character.collectBottle();
                 this.statusBarBottle.setPercentage(this.character.bottles);
                 return false;
@@ -220,13 +235,21 @@ class World {
     }
 
     gameOver() {
+        if (this.isGameOver) return;
+
         this.isGameOver = true;
+        this.audioManager.stop('background');
+        this.audioManager.play('gameover');
         this.stopGame();
         document.getElementById('gameOverScreen').classList.remove('d_none');
     }
 
     gameWin() {
+        if (this.isGameOver) return;
+
         this.isGameOver = true;
+        this.audioManager.stop('background');
+        this.audioManager.play('winner');
         setTimeout(() => {
             this.stopGame();
             document.getElementById('gameWinScreen').classList.remove('d_none');
@@ -235,6 +258,7 @@ class World {
     }
 
     stopGame() {
+        this.audioManager.stop('background');
         this.intervals.forEach(interval => clearInterval(interval));
         cancelAnimationFrame(this.animationFrameId);
 

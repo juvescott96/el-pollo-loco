@@ -12,12 +12,25 @@ class AudioManager {
         this.sounds['splash'] = new Audio('audio/splash.mp3');
         this.sounds['throw'] = new Audio('audio/throw.mp3');
         this.sounds['jump'] = new Audio('audio/jump.mp3');
+        this.sounds['chicken-death'] = new Audio('audio/chicken-death.mp3');
+        this.sounds['chicken-hurt'] = new Audio('audio/chicken-hurt.mp3');
+        this.sounds['hurt'] = new Audio('audio/hurt.mp3');
+        this.sounds['throw-collect'] = new Audio('audio/throw-collect.mp3');
+        this.sounds['winner'] = new Audio('audio/winner.mp3');
+        this.sounds['gameover'] = new Audio('audio/gameover.mp3');
+        this.sounds['coins'] = new Audio('audio/coins.mp3');
 
-        this.sounds['background'].volume = 0.5;
-        this.sounds['splash'].volume = 0.5;
-        this.sounds['throw'].volume = 0.5;
+        this.sounds['background'].volume = 0.2;
+        this.sounds['splash'].volume = 1;
+        this.sounds['throw'].volume = 1;
         this.sounds['jump'].volume = 1;
-
+        this.sounds['chicken-death'].volume = 1;
+        this.sounds['chicken-hurt'].volume = 1;
+        this.sounds['hurt'].volume = 0.5;
+        this.sounds['throw-collect'].volume = 1;
+        this.sounds['winner'].volume = 1;
+        this.sounds['gameover'].volume = 1;
+        this.sounds['coins'].volume = 1;
 
         this.sounds['background'].loop = true;
     }

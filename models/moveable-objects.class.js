@@ -41,7 +41,7 @@ class MoveableObject extends AnimatedObject {
     }
 
     hit() {
-        this.energy -= 1;
+        this.energy -= 10;
 
         if (this.energy < 0) {
             this.energy = 0;
@@ -52,6 +52,7 @@ class MoveableObject extends AnimatedObject {
     }
 
     isDead() {
+
         return this.energy == 0;
     }
 
@@ -64,13 +65,11 @@ class MoveableObject extends AnimatedObject {
     moveRight() {
         this.x += this.speed;
         this.idleTimer = 0;
-
     }
 
     moveLeft() {
         this.x -= this.speed;
         this.idleTimer = 0;
-
     }
 
     jump() {

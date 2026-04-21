@@ -48,6 +48,7 @@ class ThrowableObject extends MoveableObject {
             this.x += 10;
             this.playAnimation(this.IMAGES_BOTTLE);
         }, 25);
+        audioManager.play('throw');
     }
 
     splash() {
@@ -68,6 +69,7 @@ class ThrowableObject extends MoveableObject {
                 this.isRemoved = true;
             }
         }, 100);
+        audioManager.play('splash');
     }
 
     stopAnimations() {
