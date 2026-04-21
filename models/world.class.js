@@ -234,6 +234,10 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    removeEnemy(enemyToRemove) {
+        this.level.enemies = this.level.enemies.filter(enemy => enemy !== enemyToRemove);
+    }
+
     gameOver() {
         if (this.isGameOver) return;
 
@@ -250,11 +254,8 @@ class World {
         this.isGameOver = true;
         this.audioManager.stop('background');
         this.audioManager.play('winner');
-        setTimeout(() => {
-            this.stopGame();
-            document.getElementById('gameWinScreen').classList.remove('d_none');
-        }, 2000);
-
+        this.stopGame();
+        document.getElementById('gameWinScreen').classList.remove('d_none');
     }
 
     stopGame() {

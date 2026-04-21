@@ -7,6 +7,9 @@ class Endboss extends MoveableObject {
     dead = false;
     speed = 3;
     fightStartTime = 0;
+    deadImageIndex = 0;
+    deadAnimationLoops = 0;
+    deadAnimationFinished = false;
 
     offset = {
         top: 55,
@@ -90,8 +93,7 @@ class Endboss extends MoveableObject {
             let distance = Math.abs(this.x - this.world.character.x);
 
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.world.gameWin();
+                this.playDeadAnimation();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (distance < 60) {
@@ -101,6 +103,32 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 120);
+    }
+
+    playDeadAnimation() {
+        if (this.deadAnimationFinished) return;
+
+        this.playAnimationOnce(this.IMAGES_DEAD, this.deadImageIndex);
+        this.deadImageIndex++;
+
+        if (this.deadImageIndex >= this.IMAGES_DEAD.length) {
+            this.deadImageIndex = 0;
+            this.deadAnimationLoops++;
+        }
+
+        if (this.deadAnimationLoops >= 2) {
+            this.deadAnimationFinished = true;
+            this.remove = true;
+            this.stopAnimations();
+            this.world.removeEnemy(this);
+            requestAnimationFrame(() => {
+                this.world.gameWin();
+            });
+        }
+    }
+
+    dieEnemy() {
+        this.dead = true;
     }
 
     stopAnimations() {
