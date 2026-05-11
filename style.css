@@ -104,6 +104,13 @@ h1 {
     pointer-events: none;
 }
 
+.replay-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .ui-buttons {
     position: absolute;
     top: 10px;

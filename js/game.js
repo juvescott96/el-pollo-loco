@@ -33,6 +33,10 @@ function hideStartScreen() {
     document.getElementById('startScreen').style.display = 'none';
 }
 
+function showStartScreen() {
+    document.getElementById('startScreen').style.display = 'block';
+}
+
 function togglePlay() {
     let playIcon = document.getElementById('playIcon');
 
@@ -102,4 +106,21 @@ function updateFullscreenIcon() {
     }
 }
 
+function restartGame() {
+    if (world) {
+        world.stopGame();
+    }
+
+    audioManager.stopAll();
+    keyboard.reset();
+    gameStarted = false;
+    world = null;
+
+    document.getElementById('gameOverScreen').classList.add('d_none');
+    document.getElementById('gameWinScreen').classList.add('d_none');
+    document.getElementById('playIcon').src = "/img/icon/play.png";
+
+    showStartScreen();
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+}
 
