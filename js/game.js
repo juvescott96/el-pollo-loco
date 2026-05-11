@@ -10,7 +10,7 @@ let isMuted = false;
 function init() {
     canvas = document.querySelector("canvas");
     keyboard.btnPressEvents();
-
+    document.addEventListener("fullscreenchange", updateFullscreenIcon);
 }
 
 function startGame() {
@@ -89,4 +89,17 @@ function toggleFullscreen() {
         }
     }
 }
+
+function updateFullscreenIcon() {
+    let fullscreenIcon = document.getElementById("fullscreenIcon");
+
+    if (document.fullscreenElement) {
+        fullscreenIcon.src = "/img/icon/fullscreen_exit.png";
+        fullscreenIcon.alt = "exit fullscreen";
+    } else {
+        fullscreenIcon.src = "/img/icon/fullscreen.png";
+        fullscreenIcon.alt = "fullscreen";
+    }
+}
+
 
