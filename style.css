@@ -16,10 +16,17 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: 'zabars', sans-serif;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 canvas {
     background-color: black;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 h1 {
@@ -30,8 +37,9 @@ h1 {
 
 .game-container {
     position: relative;
-    width: 720px;
-    height: 480px;
+    width: min(720px, 100vw, calc((100dvh - 40px) * 720 / 480));
+    aspect-ratio: 720 / 480;
+    margin: 0 auto;
 }
 
 .startscreen {
@@ -61,7 +69,6 @@ h1 {
     width: 50%;
     height: 50%;
     object-fit: contain;
-
     transform: scale(1);
     transition: transform 1s ease;
 }
@@ -84,7 +91,7 @@ h1 {
     border: 2px solid #764300e1;
     font-size: 24px;
     cursor: pointer;
-        display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -124,7 +131,7 @@ h1 {
     bottom: 10px;
     left: 30px;
     right: 30px;
-    display: flex;
+    display: none;
     justify-content: space-between;
 }
 
@@ -143,4 +150,75 @@ h1 {
     width: 100%;
     height: 100%;
     display: block;
+}
+
+.rotate-device {
+    display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .control-buttons {
+        display: flex;
+    }
+}
+
+@media  (orientation: portrait) {
+    .rotate-device {
+        position: fixed;
+        inset: 0;
+        background-color: black;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    h1,
+    .game-container {
+        display: none;
+    }
+}
+
+@media (max-width: 720px) {
+    h1 {
+        display: none;
+    }
+}
+
+@media (max-height: 650px) {
+    h1 {
+        display: none;
+    }
+}
+
+@media (max-height: 400px) {
+    .btn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .btn img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .ui-buttons {
+        top: 8px;
+        right: 16px;
+        gap: 8px;
+    }
+
+    .control-buttons {
+        bottom: 8px;
+        left: 24px;
+        right: 24px;
+    }
+
+    .left-controls,
+    .right-controls {
+        gap: 8px;
+    }
 }
