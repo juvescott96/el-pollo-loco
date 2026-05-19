@@ -34,22 +34,24 @@ class Chicken extends MoveableObject {
     }
 
     animate() {
+        this.moveInterval = setInterval(() => this.moveChicken(), 1000 / 60);
+        this.animationInterval = setInterval(() => this.playChickenAnimation(), 150);
+    }
 
-        this.moveInterval = setInterval(() => {
-            if (this.world && this.world.isPaused) return;
-            if (!this.dead) {
-                this.moveLeft();
-            }
-        }, 1000 / 60);
+    moveChicken() {
+        if (this.world && this.world.isPaused) return;
+        if (!this.dead) {
+            this.moveLeft();
+        }
+    }
 
-        this.animationInterval = setInterval(() => {
-            if (this.world && this.world.isPaused) return;
-            if (this.dead) {
-                this.loadImage(this.IMAGES_DEAD[0]);
-            } else {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
-        }, 150);
+    playChickenAnimation() {
+        if (this.world && this.world.isPaused) return;
+        if (this.dead) {
+            this.loadImage(this.IMAGES_DEAD[0]);
+        } else {
+            this.playAnimation(this.IMAGES_WALKING);
+        }
     }
 
     stopAnimations() {

@@ -73,49 +73,59 @@ class Endboss extends MoveableObject {
 
 
     animate() {
-
         this.animationInterval = setInterval(() => {
             if (this.world && this.world.isPaused) return;
             if (!this.world) return;
             if (!this.world.endBossFightStarted) return;
-
-            if (this.world.endBossFightStarted && this.fightStartTime === 0) {
-                this.fightStartTime = new Date().getTime();
-            }
-
-            let timePasssed = (new Date().getTime() - this.fightStartTime) / 1000;
-
-            if (timePasssed < 1) {
+            this.endBossStartFight();
+            if (this.isEndbossAlertTime()) {
                 this.playAnimation(this.IMAGES_ALERT);
                 return;
             }
-
             let distance = Math.abs(this.x - this.world.character.x);
-
-            if (this.isDead()) {
-                this.playDeadAnimation();
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (distance < 60) {
-                this.playAnimation(this.IMAGES_ATTACK);
-            } else {
-                this.moveLeft();
-                this.playAnimation(this.IMAGES_WALKING);
-            }
+            this.moveEndboss(distance);
         }, 120);
+    }
+
+    moveEndboss(distance) {
+        if (this.isDead()) {
+            this.playDeadAnimation();
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (distance < 60) {
+            this.playAnimation(this.IMAGES_ATTACK);
+        } else {
+            this.moveLeft();
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+    }
+
+    endBossStartFight() {
+        if (this.world.endBossFightStarted && this.fightStartTime === 0) {
+            this.fightStartTime = new Date().getTime();
+        }
+    }
+
+    isEndbossAlertTime() {
+        let timePassed = (new Date().getTime() - this.fightStartTime) / 1000;
+        return timePassed < 1.5;
     }
 
     playDeadAnimation() {
         if (this.deadAnimationFinished) return;
-
         this.playAnimationOnce(this.IMAGES_DEAD, this.deadImageIndex);
         this.deadImageIndex++;
+        this.countDeadAnimationLoops();
+        this.dieEndboss();
+    }
 
+    countDeadAnimationLoops() {
         if (this.deadImageIndex >= this.IMAGES_DEAD.length) {
             this.deadImageIndex = 0;
             this.deadAnimationLoops++;
         }
-
+    }
+    dieEndboss() {
         if (this.deadAnimationLoops >= 2) {
             this.deadAnimationFinished = true;
             this.remove = true;

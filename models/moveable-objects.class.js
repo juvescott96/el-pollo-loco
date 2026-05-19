@@ -51,7 +51,6 @@ class MoveableObject extends AnimatedObject {
     }
 
     isDead() {
-
         return this.energy == 0;
     }
 

@@ -1,13 +1,12 @@
 class ThrowableObject extends MoveableObject {
 
-
-
     offset = {
         top: 10,
         left: 10,
         right: 10,
         bottom: 10
     };
+
     IMAGES_BOTTLE = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -41,9 +40,7 @@ class ThrowableObject extends MoveableObject {
     throw() {
         this.speedY = 20;
         this.applyGravity();
-
         this.throwInterval = setInterval(() => {
-
             if (this.splashed) return;
             this.x += 10;
             this.playAnimation(this.IMAGES_BOTTLE);
@@ -54,12 +51,14 @@ class ThrowableObject extends MoveableObject {
     splash() {
         if (this.splashed) return;
         this.splashed = true;
-
         clearInterval(this.throwInterval);
         this.stopGravity();
         this.speedY = 0;
+        this.playSplashAnimation();
+        audioManager.play('splash');
+    }
 
-
+    playSplashAnimation() {
         let i = 0;
         this.splashInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_SPLASH);
@@ -69,7 +68,6 @@ class ThrowableObject extends MoveableObject {
                 this.isRemoved = true;
             }
         }, 100);
-        audioManager.play('splash');
     }
 
     stopAnimations() {

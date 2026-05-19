@@ -40,29 +40,48 @@ function showStartScreen() {
 }
 
 function togglePlay() {
-    let playIcon = document.getElementById('playIcon');
-
     if (!gameStarted) {
-        startGame();
-        playIcon.src = "/img/icon/pause.png";
-        gameStarted = true;
+        startFirstGame();
         return;
     }
+    togglePause();
+}
 
+function startFirstGame() {
+    startGame();
+    setPlayIconToPause();
+    gameStarted = true;
+}
+
+function togglePause() {
     if (world.isPaused) {
-        world.resumeGame();
-        playIcon.src = "/img/icon/pause.png";
+        resumeGame();
     } else {
-        world.pauseGame();
-        playIcon.src = "/img/icon/play.png";
+        pauseGame();
     }
+}
+
+function resumeGame() {
+    world.resumeGame();
+    setPlayIconToPause();
+}
+
+function pauseGame() {
+    world.pauseGame();
+    setPlayIconToPlay();
+}
+
+function setPlayIconToPause() {
+    document.getElementById('playIcon').src = "/img/icon/pause.png";
+}
+
+function setPlayIconToPlay() {
+    document.getElementById('playIcon').src = "/img/icon/play.png";
 }
 
 function toggleVolume() {
     let volumeIcon = document.getElementById('volumeIcon');
-
     isMuted = !isMuted;
-
     volumeIcon.src = isMuted
         ? "/img/icon/volume_off.png"
         : "/img/icon/volume_on.png";
@@ -112,16 +131,13 @@ function restartGame() {
     if (world) {
         world.stopGame();
     }
-
     audioManager.stopAll();
     keyboard.reset();
     gameStarted = false;
     world = null;
-
     document.getElementById('gameOverScreen').classList.add('d_none');
     document.getElementById('gameWinScreen').classList.add('d_none');
     document.getElementById('playIcon').src = "/img/icon/play.png";
-
     showStartScreen();
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 }
