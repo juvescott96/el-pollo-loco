@@ -41,6 +41,7 @@
     <div class="game-container" id="fullscreen">
         <img id="startScreen" class="startscreen" onclick="togglePlay()"
             src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Screen">
+
         <canvas width="720" height="480"></canvas>
 
         <div class="ui-buttons">
@@ -88,7 +89,37 @@
                 <img src="/img/icon/replay.png" alt="replay">
             </button>
         </div>
+        <div class="legal-notice">
+            <button onclick="showLegalNotice()">Legal Notice</button>
+        </div>
+        <div id="legalNoticeOverlay" class="legal-overlay d_none">
+            <div class="legal-content">
+                <h2>Legal Notice</h2>
+
+                <p>
+                    No liability is assumed for the content of this website.
+                </p>
+
+                <p>
+                    Responsible for the content:
+                </p>
+
+                <p>
+                    Dustin Condello<br>
+                    Hochstädter Landstraße 1B<br>
+                    63454 Hanau<br>
+                    Germany<br>
+                    E-mail: dustincondello@googlemail.com
+                </p>
+
+                <button class="btn legal-back-btn" onclick="hideLegalNotice()">
+                    <img src="/img/icon/arrow_left.png" alt="back">
+                </button>
+            </div>
+        </div>
     </div>
+
+
 
 </body>
 

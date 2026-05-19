@@ -156,6 +156,66 @@ h1 {
     display: none;
 }
 
+
+.legal-notice {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.legal-notice button {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    background: rgba(247, 178, 59, 0.4);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.legal-notice button:hover {
+    text-decoration: underline;
+}
+
+.legal-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.55);
+    font-family: Arial, sans-serif;
+}
+
+.legal-content {
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    color: rgb(0, 0, 0);
+    background-color: rgba(247, 178, 59, 0.9);
+    padding: 24px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.legal-content h2 {
+    margin-top: 0;
+}
+
+.legal-back-btn {
+        position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.legal-overlay.d_none {
+    display: none;
+}
+
+
 @media (hover: none) and (pointer: coarse) {
     .control-buttons {
         display: flex;

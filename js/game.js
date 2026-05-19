@@ -31,10 +31,12 @@ function waitForGameToBeReady() {
 
 function hideStartScreen() {
     document.getElementById('startScreen').style.display = 'none';
+    document.querySelector('.legal-notice').style.display = 'none';
 }
 
 function showStartScreen() {
     document.getElementById('startScreen').style.display = 'block';
+    document.querySelector('.legal-notice').style.display = 'block';
 }
 
 function togglePlay() {
@@ -122,5 +124,13 @@ function restartGame() {
 
     showStartScreen();
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function showLegalNotice() {
+    document.getElementById('legalNoticeOverlay').classList.remove('d_none');
+}
+
+function hideLegalNotice() {
+    document.getElementById('legalNoticeOverlay').classList.add('d_none');
 }
 
