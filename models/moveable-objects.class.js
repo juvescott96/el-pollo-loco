@@ -9,7 +9,6 @@ class MoveableObject extends AnimatedObject {
     lastHit = 0;
 
 
-
     applyGravity() {
         this.gravityInterval = setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -100,6 +99,4 @@ class MoveableObject extends AnimatedObject {
             this.dieEnemy();
         }
     }
-
-
 }
