@@ -104,6 +104,9 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * Checks if the character lands on top of an enemy.
+     */
     isJumpingOn(enemy) {
         const c = this.offset, e = enemy.offset;
         const charLeft = this.x + c.left;
@@ -120,6 +123,9 @@ class Character extends MoveableObject {
         return overlapX && falling && nearTop;
     }
 
+    /**
+     * Playys the character death animation.
+     */
     playDeadAnimation() {
         if (this.animationTimer >= 200) {
             if (this.deadImageIndex < this.IMAGES_DEAD.length) {
@@ -152,6 +158,9 @@ class Character extends MoveableObject {
         this.animationInterval = setInterval(() => this.playCharacter(), 50);
     }
 
+    /**
+     * Moves the character based on keyboard input.
+     */
     moveCharacter() {
         if (this.world && this.world.isPaused) return;
         if (this.canMoveRight()) {
@@ -180,6 +189,9 @@ class Character extends MoveableObject {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
+    /**
+     * Chooses the correct character aanimation.
+     */
     playCharacter() {
         if (this.world && this.world.isPaused) return;
 
@@ -198,6 +210,9 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * Prepares and plays the death animation.
+     */
     handleDeadAnimation() {
         if (!this.deadAnimationStarted) {
             this.deadAnimationStarted = true;
@@ -227,6 +242,9 @@ class Character extends MoveableObject {
         this.playAnimation(this.IMAGES_JUMPING);
     }
 
+    /**
+     * Plays the idle or long idle animation.
+     */
     playIdleAnimation() {
         this.idleTimer += 50;
         if (this.idleTimer >= 5000) {

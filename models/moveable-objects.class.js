@@ -9,6 +9,9 @@ class MoveableObject extends AnimatedObject {
     lastHit = 0;
 
 
+    /**
+     * Applies gravity to objects that can move vertically.
+     */
     applyGravity() {
         this.gravityInterval = setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -23,6 +26,9 @@ class MoveableObject extends AnimatedObject {
         clearInterval(this.gravityInterval);
     }
 
+    /**
+     * Checks if the object is above the ground.
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
@@ -39,6 +45,9 @@ class MoveableObject extends AnimatedObject {
         }
     }
 
+    /**
+     * Reduces the object´s energy after a hit.
+     */
     hit() {
         this.energy -= 10;
 
@@ -54,6 +63,9 @@ class MoveableObject extends AnimatedObject {
         return this.energy == 0;
     }
 
+    /**
+     * Checks if the object was hit recently.
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // difference in ms
         timepassed = timepassed / 1000; // difference in s
@@ -88,6 +100,9 @@ class MoveableObject extends AnimatedObject {
         }, 1000);
     }
 
+    /**
+     * Damages the endboss.
+     */
     hitEndBoss() {
         if (this.dead) return;
         this.energy -= 20;

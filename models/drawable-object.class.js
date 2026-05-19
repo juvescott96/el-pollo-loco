@@ -19,6 +19,9 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * Loads one image for this object.
+     */
     loadImage(path) {
         this.imagesToLoad++;
         this.img = new Image();
@@ -28,6 +31,9 @@ class DrawableObject {
         this.img.src = path;
     }
 
+    /**
+     * Loads multiple images for aanimations.
+     */
     loadImages(arr) {
         arr.forEach((path) => {
             this.imagesToLoad++;

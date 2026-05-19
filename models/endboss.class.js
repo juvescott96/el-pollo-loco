@@ -72,6 +72,9 @@ class Endboss extends MoveableObject {
 
 
 
+    /**
+     * Starts the endboss animation loop.
+     */
     animate() {
         this.animationInterval = setInterval(() => {
             if (this.world && this.world.isPaused) return;
@@ -87,6 +90,9 @@ class Endboss extends MoveableObject {
         }, 120);
     }
 
+    /**
+     * Controls the endboss movement and current animation.
+     */
     moveEndboss(distance) {
         if (this.isDead()) {
             this.playDeadAnimation();
@@ -100,17 +106,26 @@ class Endboss extends MoveableObject {
         }
     }
 
+    /**
+     * Saves the time when the boss fight starts.
+     */
     endBossStartFight() {
         if (this.world.endBossFightStarted && this.fightStartTime === 0) {
             this.fightStartTime = new Date().getTime();
         }
     }
 
+    /**
+     * Checks if the endboss is in the alert phase.
+     */
     isEndbossAlertTime() {
         let timePassed = (new Date().getTime() - this.fightStartTime) / 1000;
         return timePassed < 1.5;
     }
 
+    /**
+     * Plays the dead animation.
+     */
     playDeadAnimation() {
         if (this.deadAnimationFinished) return;
         this.playAnimationOnce(this.IMAGES_DEAD, this.deadImageIndex);
@@ -125,6 +140,10 @@ class Endboss extends MoveableObject {
             this.deadAnimationLoops++;
         }
     }
+
+    /**
+     * Removes the endboss and triggers the win screen.
+     */
     dieEndboss() {
         if (this.deadAnimationLoops >= 2) {
             this.deadAnimationFinished = true;

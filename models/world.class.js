@@ -33,6 +33,9 @@ class World {
         this.run();
     }
 
+    /**
+     * Connects the world instance to all game objects.
+     */
     setWorld() {
         this.character.world = this;
         this.level.enemies.forEach((enemy) => {
@@ -49,6 +52,9 @@ class World {
         });
     }
 
+    /**
+     * Check if the important start assets are loaded.
+     */
     areStartAssetsLoaded() {
         let objectsToCheck = this.obcjectsToCheck();
         let firstBackground = this.level.backgroundObjects[0];
@@ -69,6 +75,9 @@ class World {
         return objectsToCheck;
     }
 
+    /**
+     * Starts the main game loop for collisions and actions.
+     */
     run() {
         let interval = setInterval(() => {
             if (this.isGameOver || this.isPaused) return;
@@ -79,6 +88,9 @@ class World {
         this.intervals.push(interval);
     }
 
+    /**
+     * Checks all important collisions in the game.
+     */
     checkGameCollisions() {
         this.checkEnemyCollisions();
         this.checkBottleEnemyCollisions();
@@ -86,12 +98,18 @@ class World {
         this.checkBottleCollisions();
     }
 
+    /**
+     * Starts the endboss fight when the character reaches the boss area.
+     */
     checkEndbossFightStart() {
         if (this.character.x >= this.level.level_end_x - 400) {
             this.endBossFightStarted = true;
         }
     }
 
+    /**
+     * Checks if the player can throw a bottle.
+     */
     checkThrowObjects() {
         if (this.canThrowBottle()) {
             this.throwBottle();
@@ -103,6 +121,9 @@ class World {
         return this.keyboard.D && this.character.bottles > 0 && !this.throwLocked;
     }
 
+    /**
+     * Creates and throws a new bottle from the character position.
+     */
     throwBottle() {
         this.throwLocked = true;
         let bottle = new ThrowableObject(
@@ -117,6 +138,9 @@ class World {
         if (!this.keyboard.D) this.throwLocked = false;
     }
 
+    /**
+     * Checks collisions between the character and enemies.
+     */
     checkEnemyCollisions() {
         let jumpedOnEnemy = false;
         let touchedEnemyFromSide = false;
@@ -144,6 +168,9 @@ class World {
         enemy.dieEnemy();
     }
 
+    /**
+     * Handles what happens after touching or jumping on an enemy.
+     */
     handleEnemyCollisionResult(jumpedOnEnemy, touchedEnemyFromSide) {
         if (jumpedOnEnemy) {
             this.character.speedY = 15;
@@ -152,6 +179,9 @@ class World {
         }
     }
 
+    /**
+     * Damages the character and updaates the health bar.
+     */
     hurtCharacter() {
         this.character.hit();
         this.audioManager.play('hurt');
@@ -162,6 +192,9 @@ class World {
         this.level.enemies = this.level.enemies.filter(enemy => !enemy.remove);
     }
 
+    /**
+     * Checks if throw bottles hit enemies.
+     */
     checkBottleEnemyCollisions() {
         this.throwAbleObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
@@ -178,6 +211,9 @@ class World {
         this.removeBottle();
     }
 
+    /**
+     * Damages the endboss and updates the endboss health bar. 
+     */
     hurtEndboss(endboss) {
         endboss.hitEndBoss();
         this.statusBarEndboss.setPercentage(endboss.energy);
@@ -192,6 +228,9 @@ class World {
         this.level.coins = this.level.coins.filter(coin => !this.collectCoinIfColliding(coin));
     }
 
+    /**
+    * Collects a coin when the character touches it.
+    */
     collectCoinIfColliding(coin) {
         if (!this.character.isColliding(coin)) return false;
         this.audioManager.play('coins');
@@ -204,6 +243,9 @@ class World {
         this.level.bottles = this.level.bottles.filter(bottle => !this.collectBottleIfColliding(bottle));
     }
 
+    /**
+     * Collects a bottle when the character touches it, if the character has less than 5 bottles.
+     */
     collectBottleIfColliding(bottle) {
         if (!this.character.isColliding(bottle)) return false;
         if (this.character.bottles >= 5) return false;
@@ -214,6 +256,9 @@ class World {
     }
 
 
+    /**
+     * Draws the complete game world on the canvas.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.save();
@@ -225,6 +270,9 @@ class World {
         this.animationFrameId = requestAnimationFrame(() => this.draw());
     }
 
+    /**
+     * Adds all moving and static game objects to the canvas, including the character.
+     */
     addObjectsToMapAndCharacter() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
@@ -264,6 +312,9 @@ class World {
     };
 
 
+    /**
+     * Flips an object before drawing it in the opposite direction.
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -271,6 +322,9 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    /**
+     * Restores the canvas after drawing a flipped object.
+     */
     flipImageBack(mo) {
         this.ctx.restore();
         mo.x = mo.x * -1;
@@ -280,6 +334,9 @@ class World {
         this.level.enemies = this.level.enemies.filter(enemy => enemy !== enemyToRemove);
     }
 
+    /**
+     * Ends the game after the character loses.
+     */
     gameOver() {
         if (this.isGameOver) return;
         this.isGameOver = true;
@@ -289,6 +346,9 @@ class World {
         document.getElementById('gameOverScreen').classList.remove('d_none');
     }
 
+    /**
+     * Ends the game after the player wins the endboss fight.
+     */
     gameWin() {
         if (this.isGameOver) return;
         this.isGameOver = true;
@@ -298,6 +358,9 @@ class World {
         document.getElementById('gameWinScreen').classList.remove('d_none');
     }
 
+    /**
+     * Stops all game intervals, animations and sounds.
+     */
     stopGame() {
         this.audioManager.stop('background');
         this.intervals.forEach(interval => clearInterval(interval));
