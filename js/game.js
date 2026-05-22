@@ -134,7 +134,7 @@ function updateFullscreenIcon() {
     }
 }
 
-function restartGame() {
+function backToHome() {
     if (world) {
         world.stopGame();
     }
@@ -147,6 +147,18 @@ function restartGame() {
     document.getElementById('playIcon').src = "img/icon/play.png";
     showStartScreen();
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function restartGame() {
+    if (world) {
+        world.stopGame();
+    }
+    audioManager.stopAll();
+    keyboard.reset();
+    document.getElementById('gameOverScreen').classList.add('d_none');
+    document.getElementById('gameWinScreen').classList.add('d_none');
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+    startFirstGame();
 }
 
 function showLegalNotice() {

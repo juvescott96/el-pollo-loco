@@ -111,11 +111,19 @@ h1 {
     pointer-events: none;
 }
 
-.replay-btn {
+/* .replay-btn {
     position: absolute;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
+} */
+.end-buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
 }
 
 .ui-buttons {

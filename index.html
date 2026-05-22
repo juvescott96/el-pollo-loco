@@ -78,16 +78,26 @@
 
         <div id="gameOverScreen" class="overlay d_none">
             <img class="overlay-img" src="img/You won, you lost/You lost b.png" alt="You lost">
-            <button class="btn replay-btn" onclick="restartGame()">
-                <img src="img/icon/replay.png" alt="replay">
-            </button>
+            <div class="end-buttons">
+                <button class="btn" onclick="restartGame()">
+                    <img src="img/icon/replay.png" alt="replay">
+                </button>
+                <button class="btn" onclick="backToHome()">
+                    <img src="img/icon/home.png" alt="home">
+                </button>
+            </div>
         </div>
 
         <div id="gameWinScreen" class="overlay d_none">
             <img class="overlay-img" src="img/You won, you lost/You Win A.png" alt="You won">
-            <button class="btn replay-btn" onclick="restartGame()">
-                <img src="img/icon/replay.png" alt="replay">
-            </button>
+            <div class="end-buttons">
+                <button class="btn" onclick="restartGame()">
+                    <img src="img/icon/replay.png" alt="replay">
+                </button>
+                <button class="btn" onclick="backToHome()">
+                    <img src="img/icon/home.png" alt="home">
+                </button>
+            </div>
         </div>
         <div class="legal-notice">
             <button onclick="showLegalNotice()">Legal Notice</button>
