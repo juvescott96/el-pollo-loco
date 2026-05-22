@@ -85,24 +85,67 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_ALERT);
                 return;
             }
-            let distance = Math.abs(this.x - this.world.character.x);
-            this.moveEndboss(distance);
+            let characterCenter = this.world.character.x + this.world.character.width / 2;
+            let endbossCenter = this.x + this.width / 2;
+            let distance = Math.abs(endbossCenter - characterCenter);
+            this.moveEndboss(distance, characterCenter, endbossCenter);
         }, 120);
     }
 
     /**
      * Controls the endboss movement and current animation.
      */
-    moveEndboss(distance) {
+    moveEndboss(distance, characterCenter, endbossCenter) {
         if (this.isDead()) {
             this.playDeadAnimation();
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
-        } else if (distance < 60) {
+        } else if (this.isCloseEnoughToAttack()) {
+            this.turnToCharacter(characterCenter, endbossCenter);
             this.playAnimation(this.IMAGES_ATTACK);
         } else {
-            this.moveLeft();
+            this.speed = distance < 400 ? 12 : 3;
+            this.followCharacter(characterCenter, endbossCenter);
             this.playAnimation(this.IMAGES_WALKING);
+        }
+    }
+
+    isCloseEnoughToAttack() {
+        let character = this.world.character;
+
+        let characterLeft = character.x + character.offset.left;
+        let characterRight = character.x + character.width - character.offset.right;
+        let endbossLeft = this.x + this.offset.left;
+        let endbossRight = this.x + this.width - this.offset.right;
+
+        let horizontalGap;
+
+        if (characterRight < endbossLeft) {
+            horizontalGap = endbossLeft - characterRight;
+        } else if (characterLeft > endbossRight) {
+            horizontalGap = characterLeft - endbossRight;
+        } else {
+            horizontalGap = 0;
+        }
+
+        return horizontalGap < 2;
+    }
+
+    turnToCharacter(characterCenter, endbossCenter) {
+        if (characterCenter < endbossCenter) {
+            this.otherDirection = false;
+        } else {
+            this.otherDirection = true;
+        }
+    }
+
+    followCharacter(characterCenter, endbossCenter) {
+        if (characterCenter < endbossCenter) {
+            this.moveLeft();
+            this.otherDirection = false;
+        } else {
+            this.moveRight();
+            this.otherDirection = true;
         }
     }
 

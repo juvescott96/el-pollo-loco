@@ -105,7 +105,7 @@ class MoveableObject extends AnimatedObject {
      */
     hitEndBoss() {
         if (this.dead) return;
-        this.energy -= 20;
+        this.energy -= 10;
         this.lastHit = new Date().getTime();
 
         if (this.energy <= 0) {
