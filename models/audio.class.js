@@ -1,7 +1,7 @@
 class AudioManager {
 
     sounds = {};
-    isMuted = false;
+    isMuted = localStorage.getItem('isMuted') === 'true';
 
     constructor() {
         this.loadSounds();
@@ -90,6 +90,7 @@ class AudioManager {
 
         sound.pause();
     }
+
     pauseAll() {
         Object.values(this.sounds).forEach((sound) => {
             sound.pause();

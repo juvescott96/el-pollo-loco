@@ -3,7 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let audioManager = new AudioManager();
 let gameStarted = false;
-let isMuted = false;
+let isMuted = localStorage.getItem('isMuted') === 'true';
 
 
 
@@ -11,6 +11,7 @@ function init() {
     canvas = document.querySelector("canvas");
     keyboard.btnPressEvents();
     document.addEventListener("fullscreenchange", updateFullscreenIcon);
+    updateVolumeIcon();
 }
 
 function startGame() {
@@ -72,25 +73,31 @@ function pauseGame() {
 }
 
 function setPlayIconToPause() {
-    document.getElementById('playIcon').src = "/img/icon/pause.png";
+    document.getElementById('playIcon').src = "img/icon/pause.png";
 }
 
 function setPlayIconToPlay() {
-    document.getElementById('playIcon').src = "/img/icon/play.png";
+    document.getElementById('playIcon').src = "img/icon/play.png";
 }
 
 function toggleVolume() {
     let volumeIcon = document.getElementById('volumeIcon');
     isMuted = !isMuted;
-    volumeIcon.src = isMuted
-        ? "/img/icon/volume_off.png"
-        : "/img/icon/volume_on.png";
+    localStorage.setItem('isMuted', isMuted);
+    updateVolumeIcon();
 
-    if (audioManager.isMuted) {
-        audioManager.unmute();
-    } else {
+    if (isMuted) {
         audioManager.mute();
+    } else {
+        audioManager.unmute();
     }
+}
+
+function updateVolumeIcon() {
+    let volumeIcon = document.getElementById('volumeIcon');
+    volumeIcon.src = isMuted
+        ? "img/icon/volume_off.png"
+        : "img/icon/volume_on.png";
 }
 
 function toggleFullscreen() {
@@ -119,10 +126,10 @@ function updateFullscreenIcon() {
     let fullscreenIcon = document.getElementById("fullscreenIcon");
 
     if (document.fullscreenElement) {
-        fullscreenIcon.src = "/img/icon/fullscreen_exit.png";
+        fullscreenIcon.src = "img/icon/fullscreen_exit.png";
         fullscreenIcon.alt = "exit fullscreen";
     } else {
-        fullscreenIcon.src = "/img/icon/fullscreen.png";
+        fullscreenIcon.src = "img/icon/fullscreen.png";
         fullscreenIcon.alt = "fullscreen";
     }
 }
@@ -137,7 +144,7 @@ function restartGame() {
     world = null;
     document.getElementById('gameOverScreen').classList.add('d_none');
     document.getElementById('gameWinScreen').classList.add('d_none');
-    document.getElementById('playIcon').src = "/img/icon/play.png";
+    document.getElementById('playIcon').src = "img/icon/play.png";
     showStartScreen();
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 }
