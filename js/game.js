@@ -90,6 +90,10 @@ function toggleVolume() {
         audioManager.mute();
     } else {
         audioManager.unmute();
+
+        if (gameStarted && world && !world.isPaused) {
+            audioManager.playMusic('background');
+        }
     }
 }
 

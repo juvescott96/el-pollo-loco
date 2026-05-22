@@ -80,7 +80,7 @@ class AudioManager {
 
     unmute() {
         this.isMuted = false;
-        this.playMusic('background');
+        // this.playMusic('background');
     }
 
 
