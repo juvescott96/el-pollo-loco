@@ -18,6 +18,7 @@ class World {
     animationFrameId;
     intervals = [];
 
+
     constructor(canvas, keyboard, audioManager) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
@@ -126,9 +127,16 @@ class World {
      */
     throwBottle() {
         this.throwLocked = true;
+
+        let bottleX = this.character.otherDirection
+            ? this.character.x - 20
+            : this.character.x + 40;
+
         let bottle = new ThrowableObject(
-            this.character.x + 100,
-            this.character.y + 100);
+            bottleX,
+            this.character.y + 100,
+            this.character.otherDirection
+        );
         this.throwAbleObjects.push(bottle);
         this.character.bottles -= 1;
         this.statusBarBottle.setPercentage(this.character.bottles);

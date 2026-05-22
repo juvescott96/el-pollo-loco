@@ -24,13 +24,14 @@ class ThrowableObject extends MoveableObject {
 
 
 
-    constructor(x, y) {
+    constructor(x, y, otherDirection) {
         super();
         this.loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_BOTTLE);
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
+        this.otherDirection = otherDirection;
         this.width = 70;
         this.height = 70;
         this.throw();
@@ -42,7 +43,11 @@ class ThrowableObject extends MoveableObject {
         this.applyGravity();
         this.throwInterval = setInterval(() => {
             if (this.splashed) return;
-            this.x += 10;
+            if (this.otherDirection) {
+                this.x -= 10;
+            } else {
+                this.x += 10;
+            }
             this.playAnimation(this.IMAGES_BOTTLE);
         }, 25);
         audioManager.play('throw');
