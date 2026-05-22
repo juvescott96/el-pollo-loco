@@ -101,6 +101,7 @@
         </div>
         <div class="legal-notice">
             <button onclick="showLegalNotice()">Legal Notice</button>
+            <button onclick="showInstructions()">Instructions</button>
         </div>
         <div id="legalNoticeOverlay" class="legal-overlay d_none">
             <div class="legal-content">
@@ -123,6 +124,33 @@
                 </p>
 
                 <button class="btn legal-back-btn" onclick="hideLegalNotice()">
+                    <img src="img/icon/arrow_left.png" alt="back">
+                </button>
+            </div>
+        </div>
+        <div id="instructionsOverlay" class="legal-overlay d_none">
+            <div class="legal-content">
+                <h2>Instructions</h2>
+
+                <p>
+                    Move Pepe through the desert, collect coins and bottles, and defeat the final boss.
+                </p>
+
+                <p>
+                    <strong>Controls:</strong>
+                </p>
+
+                <p>
+                    Arrow Right (>): Move right<br>
+                    Arrow Left (<): Move left<br>
+                        Space: Jump<br>
+                        D: Throw bottle
+                </p>
+
+                <p>
+                    Collect bottles before throwing them. Jump on enemies or avoid them to stay alive.
+                </p>
+                <button class="btn legal-back-btn" onclick="hideInstructions()">
                     <img src="img/icon/arrow_left.png" alt="back">
                 </button>
             </div>

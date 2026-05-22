@@ -169,3 +169,11 @@ function hideLegalNotice() {
     document.getElementById('legalNoticeOverlay').classList.add('d_none');
 }
 
+function showInstructions() {
+    document.getElementById('instructionsOverlay').classList.remove('d_none');
+}
+
+function hideInstructions() {
+    document.getElementById('instructionsOverlay').classList.add('d_none');
+}
+
