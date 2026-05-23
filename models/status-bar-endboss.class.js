@@ -9,6 +9,9 @@ class StatusBarEndboss extends StatusBar {
         'img/7_statusbars/2_statusbar_endboss/blue/blue100.png',
     ];
 
+    /**
+     * Creates the endboss status bar.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES_STATUSBAR_ENDBOSS);
@@ -21,12 +24,18 @@ class StatusBarEndboss extends StatusBar {
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Updates the endboss status bar.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_STATUSBAR_ENDBOSS[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Finds the correct image for the endboss health.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

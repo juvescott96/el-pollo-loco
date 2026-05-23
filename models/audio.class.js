@@ -3,10 +3,16 @@ class AudioManager {
     sounds = {};
     isMuted = localStorage.getItem('isMuted') === 'true';
 
+    /**
+     * Creates the audio manager and loads sounds.
+     */
     constructor() {
         this.loadSounds();
     }
 
+    /**
+     * Loads all game sounds.
+     */
     loadSounds() {
         this.sounds['background'] = new Audio('audio/background-sound.mp3');
         this.sounds['splash'] = new Audio('audio/splash.mp3');
@@ -35,6 +41,9 @@ class AudioManager {
         this.sounds['background'].loop = true;
     }
 
+    /**
+     * Plays a sound from the start.
+     */
     play(name) {
         if (this.isMuted) return;
 
@@ -47,6 +56,9 @@ class AudioManager {
         });
     }
 
+    /**
+     * Plays music without restarting it.
+     */
     playMusic(name) {
         if (this.isMuted) return;
 
@@ -58,6 +70,9 @@ class AudioManager {
         });
     }
 
+    /**
+     * Stops one sound.
+     */
     stop(name) {
         let sound = this.sounds[name];
         if (!sound) return;
@@ -66,6 +81,9 @@ class AudioManager {
         sound.currentTime = 0;
     }
 
+    /**
+     * Stops all sounds.
+     */
     stopAll() {
         Object.values(this.sounds).forEach((sound) => {
             sound.pause();
@@ -73,17 +91,24 @@ class AudioManager {
         });
     }
 
+    /**
+     * Mutes all sounds.
+     */
     mute() {
         this.isMuted = true;
         this.pauseAll();
     }
 
+    /**
+     * Turns sound back on.
+     */
     unmute() {
         this.isMuted = false;
-        // this.playMusic('background');
     }
 
-
+    /**
+     * Pauses one sound.
+     */
     pause(name) {
         let sound = this.sounds[name];
         if (!sound) return;
@@ -91,10 +116,12 @@ class AudioManager {
         sound.pause();
     }
 
+    /**
+     * Pauses all sounds.
+     */
     pauseAll() {
         Object.values(this.sounds).forEach((sound) => {
             sound.pause();
         });
     }
-
 }

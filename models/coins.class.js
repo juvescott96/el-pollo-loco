@@ -16,6 +16,9 @@ class Coins extends AnimatedObject {
     ];
     currentImage = 0;
 
+    /**
+     * Creates a coin.
+     */
     constructor() {
         super();
         this.loadImage('img/8_coin/coin_1.png');
@@ -25,6 +28,9 @@ class Coins extends AnimatedObject {
         this.animate();
     }
 
+    /**
+     * Starts the coin animation loop.
+     */
     animate() {
         this.animationInterval = setInterval(() => {
             if (this.world && this.world.isPaused) return;
@@ -32,8 +38,10 @@ class Coins extends AnimatedObject {
         }, 200);
     }
 
+    /**
+     * Stops the coin animation loop.
+     */
     stopAnimations() {
         clearInterval(this.animationInterval);
     }
-
 };

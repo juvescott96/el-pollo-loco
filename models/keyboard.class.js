@@ -6,11 +6,17 @@ class Keyboard {
     SPACE = false;
     D = false;
 
+    /**
+     * Creates the keyboard controls.
+     */
     constructor() {
         this.keyPressEvents();
 
     }
 
+    /**
+     * Saves pressed keyboard keys.
+     */
     keyPressEvents() {
         window.addEventListener('keydown', (e) => {
             if (e.keyCode == 39) {
@@ -56,6 +62,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * Saves pressed mobile buttons.
+     */
     btnPressEvents() {
         document.getElementById('btnLeft').addEventListener('pointerdown', (e) => {
             e.preventDefault();
@@ -107,6 +116,9 @@ class Keyboard {
         document.getElementById('throwBtn').addEventListener('contextmenu', (e) => e.preventDefault());
     }
 
+    /**
+     * Resets all pressed keys.
+     */
     reset() {
         this.LEFT = false;
         this.RIGHT = false;

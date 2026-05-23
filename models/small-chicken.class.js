@@ -23,6 +23,9 @@ class SmallChicken extends MoveableObject {
     currentImage = 0;
 
 
+    /**
+     * Creates a small chicken enemy.
+     */
     constructor() {
         super();
         this.loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
@@ -32,6 +35,9 @@ class SmallChicken extends MoveableObject {
         this.animate();
     }
 
+    /**
+     * Starts the small chicken movement and animation loops.
+     */
     animate() {
 
         this.moveInterval = setInterval(() => {
@@ -51,6 +57,9 @@ class SmallChicken extends MoveableObject {
         }, 150);
     }
 
+    /**
+     * Stops the small chicken animation loops.
+     */
     stopAnimations() {
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);

@@ -24,6 +24,9 @@ class Chicken extends MoveableObject {
     currentImage = 0;
 
 
+    /**
+     * Creates a normal chicken enemy.
+     */
     constructor() {
         super();
         this.loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
@@ -33,11 +36,17 @@ class Chicken extends MoveableObject {
         this.animate();
     }
 
+    /**
+     * Starts the chicken movement and animation loops.
+     */
     animate() {
         this.moveInterval = setInterval(() => this.moveChicken(), 1000 / 60);
         this.animationInterval = setInterval(() => this.playChickenAnimation(), 150);
     }
 
+    /**
+     * Moves the chicken to the left.
+     */
     moveChicken() {
         if (this.world && this.world.isPaused) return;
         if (!this.dead) {
@@ -45,6 +54,9 @@ class Chicken extends MoveableObject {
         }
     }
 
+    /**
+     * Plays the chicken walking or dead image.
+     */
     playChickenAnimation() {
         if (this.world && this.world.isPaused) return;
         if (this.dead) {
@@ -54,6 +66,9 @@ class Chicken extends MoveableObject {
         }
     }
 
+    /**
+     * Stops the chicken animation loops.
+     */
     stopAnimations() {
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);

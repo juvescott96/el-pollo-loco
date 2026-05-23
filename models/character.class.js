@@ -80,6 +80,9 @@ class Character extends MoveableObject {
     };
 
 
+    /**
+     * Creates the character and loads all character images.
+     */
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -94,10 +97,16 @@ class Character extends MoveableObject {
         this.animationTimer = 0;
     }
 
+    /**
+     * Adds coins to the character.
+     */
     collectCoin() {
         this.coins += 20;
     }
 
+    /**
+     * Adds one bottle to the character.
+     */
     collectBottle() {
         if (this.bottles < 5) {
             this.bottles += 1;
@@ -105,7 +114,7 @@ class Character extends MoveableObject {
     }
 
     /**
-     * Checks if the character lands on top of an enemy.
+     * Checks if the character jumps on an enemy.
      */
     isJumpingOn(enemy) {
         const c = this.offset, e = enemy.offset;
@@ -124,7 +133,7 @@ class Character extends MoveableObject {
     }
 
     /**
-     * Playys the character death animation.
+     * Plays the character death animation.
      */
     playDeadAnimation() {
         if (this.animationTimer >= 200) {
@@ -140,12 +149,18 @@ class Character extends MoveableObject {
         this.isGameOver();
     }
 
+    /**
+     * Checks if the character has fallen out of the game.
+     */
     isGameOver() {
         if (this.y > 600) {
             this.world.gameOver();
         }
     }
 
+    /**
+     * Makes the character jump once during the death animation.
+     */
     playDeadJump() {
         if (this.deadImageIndex === 2 && !this.deadJumpDone) {
             this.deadJump();
@@ -153,23 +168,24 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * Starts the character movement and animation loops.
+     */
     animate() {
         this.moveInterval = setInterval(() => this.moveCharacter(), 1000 / 60);
         this.animationInterval = setInterval(() => this.playCharacter(), 50);
     }
 
     /**
-     * Moves the character based on keyboard input.
+     * Moves the character with the keyboard.
      */
     moveCharacter() {
         if (this.world && this.world.isPaused) return;
         if (this.canMoveRight()) {
-            this.moveRight();
-            this.otherDirection = false;
+            this.isMovingRight();
         }
         if (this.canMoveLeft()) {
-            this.moveLeft();
-            this.otherDirection = true;
+            this.isMovingLeft();
         }
         if (this.canJump()) {
             this.jump();
@@ -180,20 +196,45 @@ class Character extends MoveableObject {
         this.world.camera_x += (targetCameraX - this.world.camera_x) * 0.08;
     }
 
+    /**
+     * Moves the character to the right.
+     */
+    isMovingRight() {
+        this.moveRight();
+        this.otherDirection = false;
+    }
+
+    /**
+     * Moves the character to the left.
+     */
+    isMovingLeft() {
+        this.moveLeft();
+        this.otherDirection = true;
+    }
+
+    /**
+     * Checks if the character can move right.
+     */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
+    /**
+     * Checks if the character can move left.
+     */
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
 
+    /**
+     * Checks if the character can jump.
+     */
     canJump() {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
     /**
-     * Chooses the correct character aanimation.
+     * Plays the correct character animation.
      */
     playCharacter() {
         if (this.world && this.world.isPaused) return;
@@ -226,27 +267,39 @@ class Character extends MoveableObject {
         this.playDeadAnimation();
     }
 
+    /**
+     * Plays the hurt animation.
+     */
     playHurt() {
         this.animationSpeed = 50;
         this.playAnimation(this.IMAGES_HURT);
     }
 
+    /**
+     * Checks if the character is walking.
+     */
     isWalking() {
         return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
     }
 
+    /**
+     * Plays the walking animation.
+     */
     playWalking() {
         this.animationSpeed = 50;
         this.playAnimation(this.IMAGES_WALKING);
     }
 
+    /**
+     * Plays the jumping animation.
+     */
     playJumping() {
         this.animationSpeed = 50;
         this.playAnimation(this.IMAGES_JUMPING);
     }
 
     /**
-     * Plays the idle or long idle animation.
+     * Plays the idle animation when the character stands still.
      */
     playIdleAnimation() {
         this.idleTimer += 50;
@@ -263,23 +316,34 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * Checks if enough time passed for the next animation frame.
+     */
     timeOverSpeed() {
         return this.animationTimer >= this.animationSpeed;
     }
 
+    /**
+     * Plays the long idle animation.
+     */
     playLongIdle() {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         this.animationTimer = 0;
     }
 
+    /**
+     * Plays the normal idle animation.
+     */
     playIdle() {
         this.playAnimation(this.IMAGES_IDLE);
         this.animationTimer = 0;
     }
 
+    /**
+     * Stops the character animation loops.
+     */
     stopAnimations() {
         clearInterval(this.moveInterval);
         clearInterval(this.animationInterval);
     }
-
 }

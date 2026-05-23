@@ -11,6 +11,9 @@ class StatusBarCoin extends StatusBar {
     ];
 
 
+    /**
+     * Creates the coin status bar.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES_COIN);
@@ -23,12 +26,18 @@ class StatusBarCoin extends StatusBar {
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Updates the coin status bar.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_COIN[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Finds the correct image for the collected coins.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

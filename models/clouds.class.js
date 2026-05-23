@@ -4,6 +4,9 @@ class Clouds extends MoveableObject {
     height = 250;
     width = 350;
 
+    /**
+     * Creates a cloud.
+     */
     constructor(imagePath, x) {
         super();
         this.loadImage(imagePath);
@@ -12,6 +15,9 @@ class Clouds extends MoveableObject {
         this.animate();
     }
 
+    /**
+     * Moves the cloud slowly to the left.
+     */
     animate() {
         setInterval(() => {
             if (this.world && this.world.isPaused) return;
@@ -21,4 +27,3 @@ class Clouds extends MoveableObject {
 
 
 }
-

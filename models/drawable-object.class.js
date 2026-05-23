@@ -11,8 +11,7 @@ class DrawableObject {
 
 
     /**
-     * draws the current image on the canvas
-     * @param {CanvasRenderingContext2D} ctx - the convas context used to draw 
+     * Draws the current image on the canvas.
      */
     draw(ctx) {
         if (!this.img || !this.img.complete) return;
@@ -32,7 +31,7 @@ class DrawableObject {
     }
 
     /**
-     * Loads multiple images for aanimations.
+     * Loads multiple images for animations.
      */
     loadImages(arr) {
         arr.forEach((path) => {
@@ -45,5 +44,4 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
-
 }

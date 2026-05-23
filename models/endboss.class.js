@@ -58,6 +58,9 @@ class Endboss extends MoveableObject {
 
     currentImage = 0;
 
+    /**
+     * Creates the endboss and loads all boss images.
+     */
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
@@ -68,9 +71,6 @@ class Endboss extends MoveableObject {
         this.x = 2500;
         this.animate();
     }
-
-
-
 
     /**
      * Starts the endboss animation loop.
@@ -110,14 +110,15 @@ class Endboss extends MoveableObject {
         }
     }
 
+    /**
+     * Checks if the endboss is close enough to attack.
+     */
     isCloseEnoughToAttack() {
         let character = this.world.character;
-
         let characterLeft = character.x + character.offset.left;
         let characterRight = character.x + character.width - character.offset.right;
         let endbossLeft = this.x + this.offset.left;
         let endbossRight = this.x + this.width - this.offset.right;
-
         let horizontalGap;
 
         if (characterRight < endbossLeft) {
@@ -127,10 +128,12 @@ class Endboss extends MoveableObject {
         } else {
             horizontalGap = 0;
         }
-
         return horizontalGap < 2;
     }
 
+    /**
+     * Turns the endboss toward the character.
+     */
     turnToCharacter(characterCenter, endbossCenter) {
         if (characterCenter < endbossCenter) {
             this.otherDirection = false;
@@ -139,6 +142,9 @@ class Endboss extends MoveableObject {
         }
     }
 
+    /**
+     * Moves the endboss toward the character.
+     */
     followCharacter(characterCenter, endbossCenter) {
         if (characterCenter < endbossCenter) {
             this.moveLeft();
@@ -177,6 +183,9 @@ class Endboss extends MoveableObject {
         this.dieEndboss();
     }
 
+    /**
+     * Counts how often the death animation has played.
+     */
     countDeadAnimationLoops() {
         if (this.deadImageIndex >= this.IMAGES_DEAD.length) {
             this.deadImageIndex = 0;
@@ -199,10 +208,16 @@ class Endboss extends MoveableObject {
         }
     }
 
+    /**
+     * Marks the endboss as dead.
+     */
     dieEnemy() {
         this.dead = true;
     }
 
+    /**
+     * Stops the endboss animation loop.
+     */
     stopAnimations() {
         clearInterval(this.animationInterval);
     }

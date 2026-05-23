@@ -24,6 +24,9 @@ class ThrowableObject extends MoveableObject {
 
 
 
+    /**
+     * Creates a thrown bottle.
+     */
     constructor(x, y, otherDirection) {
         super();
         this.loadImage('img/6_salsa_bottle/salsa_bottle.png');
@@ -38,6 +41,9 @@ class ThrowableObject extends MoveableObject {
         this.splashed = false;
     }
 
+    /**
+     * Throws the bottle through the air.
+     */
     throw() {
         this.speedY = 20;
         this.applyGravity();
@@ -53,6 +59,9 @@ class ThrowableObject extends MoveableObject {
         audioManager.play('throw');
     }
 
+    /**
+     * Starts the bottle splash.
+     */
     splash() {
         if (this.splashed) return;
         this.splashed = true;
@@ -63,6 +72,9 @@ class ThrowableObject extends MoveableObject {
         audioManager.play('splash');
     }
 
+    /**
+     * Plays the splash animation.
+     */
     playSplashAnimation() {
         let i = 0;
         this.splashInterval = setInterval(() => {
@@ -75,6 +87,9 @@ class ThrowableObject extends MoveableObject {
         }, 100);
     }
 
+    /**
+     * Stops the bottle animation loops.
+     */
     stopAnimations() {
         clearInterval(this.throwInterval);
         clearInterval(this.splashInterval);

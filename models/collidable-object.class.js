@@ -1,6 +1,9 @@
 class CollidableObject extends DrawableObject {
 
 
+    /**
+     * Creates an object with collision borders.
+     */
     constructor() {
         super();
         this.offset = {
@@ -11,6 +14,9 @@ class CollidableObject extends DrawableObject {
         };
     }
 
+    /**
+     * Checks if this object touches another object.
+     */
     isColliding(other) {
         return this.x + this.width - this.offset.right > other.x + other.offset.left &&
             this.x + this.offset.left < other.x + other.width - other.offset.right &&

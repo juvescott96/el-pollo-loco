@@ -11,7 +11,7 @@ class AnimatedObject extends CollidableObject {
     }
 
     /**
-     * Shows one specific image frame. 
+     * Shows one specific image frame.
      */
     playAnimationOnce(images, index) {
         if (index < images.length) {
