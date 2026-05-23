@@ -129,18 +129,30 @@ h1 {
 }
 
 .control-buttons {
+    position: fixed;
+    left: max(16px, env(safe-area-inset-left));
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    display: none;
+    justify-content: space-between;
+    z-index: 50;
+    pointer-events: none;
+}
+
+/* .control-buttons {
     position: absolute;
     bottom: 10px;
     left: 30px;
     right: 30px;
     display: none;
     justify-content: space-between;
-}
+} */
 
 .left-controls,
 .right-controls {
-    display: flex;
-    gap: 10px;
+    /* display: flex;
+    gap: 10px; */
+    pointer-events: auto;
 }
 
 #fullscreen:fullscreen {
@@ -186,39 +198,6 @@ h1 {
     text-decoration: none;
 }
 
-
-/* .legal-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.55);
-    font-family: Arial, sans-serif;
-}
-
-.legal-content {
-    max-width: 80%;
-    max-height: 80%;
-    overflow-y: auto;
-    color: rgb(0, 0, 0);
-    background-color: rgba(247, 178, 59, 0.9);
-    padding: 24px;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.legal-content h2 {
-    margin-top: 0;
-}
-
-.legal-back-btn {
-        position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-} */
 
 .legal-overlay {
     position: absolute;
@@ -272,6 +251,21 @@ h1 {
     .control-buttons {
         display: flex;
     }
+
+    .btn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .btn img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .left-controls, 
+    .right-controls {
+        gap: 16px;
+    }
 }
 
 @media  (orientation: portrait) {
@@ -306,15 +300,15 @@ h1 {
     }
 }
 
-@media (max-height: 400px) {
+@media (max-height: 400px) and (hover: none) and (pointer: coarse) {
     .btn {
-        width: 24px;
-        height: 24px;
+        width: 40px;
+        height: 40px;
     }
 
     .btn img {
-        width: 16px;
-        height: 16px;
+        width: 30px;
+        height: 30px;
     }
 
     .ui-buttons {
@@ -324,13 +318,6 @@ h1 {
     }
 
     .control-buttons {
-        bottom: 8px;
-        left: 24px;
-        right: 24px;
-    }
-
-    .left-controls,
-    .right-controls {
-        gap: 8px;
+        bottom: max(10px, env(safe-area-inset-bottom));
     }
 }
