@@ -103,7 +103,7 @@ class World {
      * Starts the endboss fight when the character reaches the boss area.
      */
     checkEndbossFightStart() {
-        if (this.character.x >= this.level.level_end_x - 400) {
+        if (this.character.x >= this.level.level_end_x - 1200) {
             this.endBossFightStarted = true;
         }
     }
