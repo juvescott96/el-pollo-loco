@@ -193,7 +193,7 @@ class Character extends MoveableObject {
         let cameraOffset = this.otherDirection ? 500 : 100;
         let targetCameraX = -this.x + cameraOffset;
 
-        this.world.camera_x += (targetCameraX - this.world.camera_x) * 0.08;
+        this.world.camera_x += (targetCameraX - this.world.camera_x) * 0.05;
     }
 
     /**
